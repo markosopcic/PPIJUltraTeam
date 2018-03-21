@@ -12,7 +12,6 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-    private GamePhase phase;
 
     public GamePanel(Context context) {
         super(context);
@@ -23,15 +22,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
 
-        phase = GamePhase.PRESENTING_WORD;
     }
 
-    private enum GamePhase {
-        //faza u kojoj igra prikazuje sliku, slovka i ispisuje riječ
-        PRESENTING_WORD,
-        //faza u kojoj igrač piše (drag and dropanjem slova) riječ
-        TYPING_WORD;
-    }
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
@@ -60,35 +52,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(phase == GamePhase.PRESENTING_WORD) {
-            return true;
-        }
-        //TODO dodati imoplementaciju za TYPING_WORD fazu
+
         return super.onTouchEvent(event);
     }
 
     public void update() {
-        if(phase == GamePhase.PRESENTING_WORD) {
-            updateWordPresentation();
-            return;
-        }
-        //TODO dodati implementaciju za TYPING_WORD fazu
+
      }
 
      private void updateWordPresentation() {
-        //TODO dodati implementaciju
+
      }
 
     @Override
     public void draw(Canvas canvas) {
-        //TODO dodati crtanje objekata zajedničkih objema fazama
 
-        if(phase == GamePhase.PRESENTING_WORD) {
-            //TODO dodati crtanje objekata karakterističnih za PRESENTING_WORD fazu
-            return;
-        }
-
-        //TODO dodati crtanje objekata karakterističnih za TYPING_WORD fazu
 
         super.draw(canvas);
     }
