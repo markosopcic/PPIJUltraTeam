@@ -12,7 +12,7 @@ import android.view.SurfaceView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
-
+    private Game currentGame;
     public GamePanel(Context context) {
         super(context);
 
@@ -57,7 +57,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-
+        currentGame.update();
      }
 
      private void updateWordPresentation() {
@@ -66,7 +66,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void draw(Canvas canvas) {
-
+        currentGame.draw(canvas);
 
         super.draw(canvas);
     }
