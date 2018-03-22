@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Lumen</string>
+    <string name="app_name">Drinking Game</string>
     <string name="pokreniIgru">Pokreni igru</string>
 
     <string name="title_activity_fullscreen">FullscreenActivity</string>

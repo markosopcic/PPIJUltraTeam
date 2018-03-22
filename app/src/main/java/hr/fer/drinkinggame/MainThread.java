@@ -3,9 +3,7 @@ package hr.fer.drinkinggame;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-/**
- * Created by Alen on 6.11.2017..
- */
+
 
 public class MainThread extends Thread {
     public static final int MAX_FPS = 30;

@@ -2,17 +2,18 @@ package hr.fer.drinkinggame;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-/**
- * Created by Alen on 6.11.2017..
- */
+import java.io.Console;
+
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
     private Game currentGame;
+
     public GamePanel(Context context) {
         super(context);
 
@@ -21,7 +22,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(),this);
 
         setFocusable(true);
-
+        currentGame=new HigherLowerGame(context.getAssets(),getResources().getDisplayMetrics());
+        Log.d("wat","wut");
     }
 
 
@@ -57,17 +59,16 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-        currentGame.update();
+       if(currentGame!=null) currentGame.update();
      }
 
-     private void updateWordPresentation() {
-
-     }
 
     @Override
     public void draw(Canvas canvas) {
-        currentGame.draw(canvas);
-
         super.draw(canvas);
+       if(currentGame!=null) currentGame.draw(canvas);
+
+
+
     }
 }

@@ -2,6 +2,7 @@ package hr.fer.drinkinggame;
 
 import android.graphics.Canvas;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,17 +10,17 @@ import java.util.List;
  */
 
 public abstract class Game implements GameObject{
-    List<GameObject> gameObjects;
+    List<GameObject> gameObjects=new ArrayList<>();
 
 
     public void draw(Canvas canvas){
-        for(GameObject obj:gameObjects){
+       for(GameObject obj:gameObjects){
             obj.draw(canvas);
         }
     }
 
     public void update(){
-        for(GameObject obj:gameObjects){
+          for(GameObject obj:gameObjects){
             obj.update();
         }
     }
