@@ -7,6 +7,8 @@ import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -78,5 +80,8 @@ public class BombGame extends Game {
 
     }
 
+    @Override
+    public void handleTouch(MotionEvent event) {
 
+    }
 }
