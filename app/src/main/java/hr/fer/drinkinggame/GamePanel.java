@@ -14,16 +14,19 @@ import java.io.Console;
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
     private Game currentGame;
+    private Context context;
 
     public GamePanel(Context context) {
         super(context);
+        this.context = context;
 
         getHolder().addCallback(this);
 
         thread = new MainThread(getHolder(),this);
 
         setFocusable(true);
-        currentGame=new HigherLowerGame(context.getAssets(),getResources().getDisplayMetrics());
+        //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
+        currentGame=new BombGame(context,getResources().getDisplayMetrics());
         Log.d("wat","wut");
     }
 

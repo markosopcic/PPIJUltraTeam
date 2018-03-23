@@ -1,5 +1,6 @@
 package hr.fer.drinkinggame;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
@@ -19,7 +20,8 @@ public class HigherLowerGame extends Game {
     private Card right;
 
 
-    public HigherLowerGame(AssetManager man, DisplayMetrics dm){
+    public HigherLowerGame(Context context, DisplayMetrics dm){
+        AssetManager man = context.getAssets();
         deck=new CardDeck(man,dm);
         left=new ArrayList<>();
         int index;
