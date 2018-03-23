@@ -1,6 +1,7 @@
 package hr.fer.drinkinggame;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,4 +25,6 @@ public abstract class Game implements GameObject{
             obj.update();
         }
     }
+
+    public abstract void handleTouch(MotionEvent event);
 }

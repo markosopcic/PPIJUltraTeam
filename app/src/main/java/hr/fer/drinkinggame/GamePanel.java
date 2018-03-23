@@ -2,6 +2,7 @@ package hr.fer.drinkinggame;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -54,7 +55,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-
+        currentGame.handleTouch(event);
         return super.onTouchEvent(event);
     }
 
@@ -66,6 +67,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
+        canvas.drawColor(Color.WHITE);
        if(currentGame!=null) currentGame.draw(canvas);
 
 

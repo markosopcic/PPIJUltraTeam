@@ -3,6 +3,7 @@ package hr.fer.drinkinggame;
 import android.content.res.AssetManager;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,4 +33,8 @@ public class HigherLowerGame extends Game {
     }
 
 
+    @Override
+    public void handleTouch(MotionEvent event) {
+
+    }
 }
