@@ -32,6 +32,7 @@ public class HigherLowerGame extends Game {
         right.changePoint(new Point(0,0));
         this.gameObjects.addAll(left);
         this.gameObjects.add(right);
+
     }
 
 
