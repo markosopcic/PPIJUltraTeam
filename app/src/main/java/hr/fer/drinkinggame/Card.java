@@ -37,4 +37,26 @@ public class Card implements GameObject {
     public Bitmap getCard(){
         return card;
     }
+
+    public boolean isHigher(Card c){
+        String s1=this.name.split("_")[0];
+        String s2=c.name.split("_")[0];
+        if(CardDeck.strengths.indexOf(s1)>CardDeck.strengths.indexOf(s2)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isLower(Card c){
+        String s1=this.name.split("_")[0];
+        String s2=c.name.split("_")[0];
+        if(CardDeck.strengths.indexOf(s1)<CardDeck.strengths.indexOf(s2)){
+            return true;
+        }
+        return false;
+    }
+
+    public Point getPoint(){
+        return point;
+    }
 }

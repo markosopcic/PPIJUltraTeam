@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  */
 
 public class CardDeck {
-
+    public static List<String> strengths= Arrays.asList("2","3","4","5","6","7","8","9","jack","queen","king","10","ace");
    private List<Card> cards;
 
     public CardDeck(AssetManager manager, DisplayMetrics dm){
