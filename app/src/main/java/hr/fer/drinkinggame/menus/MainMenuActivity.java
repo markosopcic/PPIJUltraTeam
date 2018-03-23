@@ -17,7 +17,7 @@ public class MainMenuActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        ImageButton startLetterGameBtn = findViewById(R.id.pokreniIgru);
+        Button startLetterGameBtn = findViewById(R.id.pokreniIgru);
         startLetterGameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -27,5 +27,10 @@ public class MainMenuActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 }

@@ -33,4 +33,8 @@ public class Card implements GameObject {
     public void changePoint(Point newPoint){
         point=newPoint;
     }
+
+    public Bitmap getCard(){
+        return card;
+    }
 }

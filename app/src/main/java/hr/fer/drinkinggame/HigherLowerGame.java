@@ -29,6 +29,9 @@ public class HigherLowerGame extends Game {
         Card c=deck.pullCardAtIndex(rand.nextInt(deck.sizeOfDeck()));
         c.changePoint(new Point(dm.widthPixels/2,dm.heightPixels/2));
         right=deck.pullCardAtIndex(rand.nextInt(deck.sizeOfDeck()));
+        int x,y;
+        x=dm.widthPixels-right.getCard().getWidth()-dm.widthPixels/10;
+        y=(int)(dm.heightPixels*0.1);
         right.changePoint(new Point(0,0));
         this.gameObjects.addAll(left);
         this.gameObjects.add(right);

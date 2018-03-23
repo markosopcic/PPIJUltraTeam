@@ -26,10 +26,14 @@ public class CardDeck {
 
         }
         cards=new ArrayList<Card>();
+        int cardHeight,cardWidth;
+        cardHeight=(int)(dm.heightPixels*0.4);
+        cardWidth=(int)(dm.widthPixels*0.4);
         for(String s:c){
             Bitmap d=null;
             try {
                  d = BitmapFactory.decodeStream(manager.open("cards/"+s));
+                 d=Bitmap.createScaledBitmap(d,cardWidth,cardHeight,false);
             }catch(Exception e){}
           String[] spl=s.split("/");
 
