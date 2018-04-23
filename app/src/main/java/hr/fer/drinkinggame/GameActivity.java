@@ -10,8 +10,10 @@ public class GameActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
         super.onCreate(savedInstanceState);
         setContentView(new GamePanel(this));
+        }catch (Exception e) {e.printStackTrace();}
 
     }
 }
