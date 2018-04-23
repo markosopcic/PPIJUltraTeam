@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hr.fer.drinkinggame.Background;
+import hr.fer.drinkinggame.Line;
 
 /**
  * Created by roman on 23-Mar-18.
@@ -40,17 +41,25 @@ public class Pantomime extends Game {
         int y = dm.heightPixels/2;
         y -= (9/4)*rectHeight;
         for (String temp : keyWords){
+            int width = (int) textPaint.measureText(temp);
+
             //int left = x - rectWidth/2;
             //int right = x + rectWidth/2;
             //int top = y - rectHeight/2;
             //int bottom = y + rectHeight/2;
             //TextFieldContainer container = new TextFieldContainer(left, top, right, bottom);
-            int width = (int) textPaint.measureText(temp);
+            //this.gameObjects.add(container);
+
             TextField text = new TextField(temp, textPaint, width);
             Point point = new Point(x - width/2, y - 32 );
             text.setPoint(point);
-            //this.gameObjects.add(container);
             this.gameObjects.add(text);
+
+            Paint linePaint = new Paint();
+            linePaint.setColor(Color.RED);
+            this.gameObjects.add(new Line(x+10+width/2,y+32,x+30+width/2,y-32, linePaint));
+            this.gameObjects.add(new Line(x+10+width/2,y-32,x+30+width/2,y+32, linePaint));
+
             y = y + rectHeight + rectHeight/2;
         }
     }
