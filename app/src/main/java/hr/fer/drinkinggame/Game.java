@@ -1,8 +1,10 @@
 package hr.fer.drinkinggame;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,14 +16,18 @@ public abstract class Game implements GameObject{
 
 
     public void draw(Canvas canvas){
-       for(GameObject obj:gameObjects){
+        List<GameObject> toDraw=new ArrayList<>(gameObjects);
+       for(GameObject obj:toDraw){
             obj.draw(canvas);
         }
     }
 
     public void update(){
-          for(GameObject obj:gameObjects){
+        List<GameObject> toUpdate=new ArrayList<>(gameObjects);
+          for(GameObject obj:toUpdate){
             obj.update();
         }
     }
+
+    public abstract void handleTouch(MotionEvent event);
 }
