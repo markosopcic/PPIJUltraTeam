@@ -1,5 +1,6 @@
 package hr.fer.drinkinggame;
 
+import android.graphics.Canvas;
 import android.graphics.RectF;
 
 /**
@@ -7,4 +8,14 @@ import android.graphics.RectF;
  */
 
 public class TextFieldContainer extends RectF implements GameObject {
+
+    @Override
+    public void draw(Canvas canvas) {
+
+    }
+
+    @Override
+    public void update() {
+
+    }
 }

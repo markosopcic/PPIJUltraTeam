@@ -6,6 +6,7 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,5 +50,10 @@ public class Pantomime extends Game {
             this.gameObjects.add(text);
             y=y + rectHeight + 20;
         }
+    }
+
+    @Override
+    public void handleTouch(MotionEvent event) {
+        
     }
 }
