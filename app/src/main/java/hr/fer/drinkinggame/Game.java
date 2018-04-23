@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public abstract class Game implements GameObject{
-    List<GameObject> gameObjects=new ArrayList<>();
+    protected List<GameObject> gameObjects=new ArrayList<>();
 
 
     public void draw(Canvas canvas){

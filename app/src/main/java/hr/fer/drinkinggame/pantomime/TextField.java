@@ -1,4 +1,4 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.pantomime;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -8,11 +8,13 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 
+import hr.fer.drinkinggame.GameObject;
+
 /**
  * Created by roman on 23-Mar-18.
  */
 
-public class TextField extends StaticLayout implements GameObject  {
+public class TextField extends StaticLayout implements GameObject {
 
     final static boolean includepad = false;
     final static float spacingadd = 0;

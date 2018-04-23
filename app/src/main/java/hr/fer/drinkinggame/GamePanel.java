@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import java.io.Console;
+import hr.fer.drinkinggame.pantomime.Pantomime;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
@@ -27,7 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
         //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
-        currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
+        currentGame=new Pantomime(getResources().getDisplayMetrics());
         Log.d("wat","wut");
     }
 
