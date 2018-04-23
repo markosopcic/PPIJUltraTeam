@@ -11,8 +11,8 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import hr.fer.drinkinggame.Background;
-import hr.fer.drinkinggame.Line;
+import hr.fer.drinkinggame.generalobjects.Background;
+import hr.fer.drinkinggame.generalobjects.Line;
 
 /**
  * Created by roman on 23-Mar-18.
