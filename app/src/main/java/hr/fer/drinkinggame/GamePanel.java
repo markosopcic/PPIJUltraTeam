@@ -27,7 +27,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
         //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
-        currentGame=new Pantomime(getResources().getDisplayMetrics());
+        currentGame=new Pantomime(context, getResources().getDisplayMetrics(), thread);
         Log.d("wat","wut");
     }
 
