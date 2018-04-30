@@ -1,10 +1,12 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.bombGame;
 
 import android.content.res.AssetManager;
 import android.os.CountDownTimer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hr.fer.drinkinggame.GameObject;
 
 /**
  * Created by Niko on 23.3.2018..

@@ -1,7 +1,9 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.bombGame;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
@@ -13,6 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import hr.fer.drinkinggame.Game;
+import hr.fer.drinkinggame.GameObject;
+import hr.fer.drinkinggame.R;
+
+import static hr.fer.drinkinggame.MainThread.canvas;
+
 
 /**
  * Created by Niko on 22.3.2018..
@@ -22,6 +30,8 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BombGame extends Game {
     private List<String> categories;
     private Category category;
+    private Bomb bomb;
+
 
     private Context context;
 
@@ -41,10 +51,21 @@ public class BombGame extends Game {
 
         //Toast.makeText(context, categoires.get(index), Toast.LENGTH_LONG).show();
 
-        category = new Category(categoires.get(index), new Point(dm.widthPixels/2,dm.heightPixels/2));
+        category = new Category(categoires.get(index), new Point(dm.widthPixels*1/10,dm.heightPixels*1/10));
+
+
 
         //ispis
         this.gameObjects.add(category);
+
+        Bitmap bombBitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.bomba);
+        bombBitmap=Bitmap.createScaledBitmap(bombBitmap,dm.widthPixels*8/10,dm.heightPixels*5/10,false);
+        Point bombaPoint=new Point(dm.widthPixels*1/10,dm.heightPixels*9/10 - bombBitmap.getHeight());
+
+        bomb = new Bomb(bombBitmap, bombaPoint);
+
+        this.gameObjects.add(bomb);
+
 
         new MyCountDownTimer(radnomNumber*1000, 1000, gameObjects , manager) { // 5000 = 5 sec
             List<GameObject> gameObjects = null;

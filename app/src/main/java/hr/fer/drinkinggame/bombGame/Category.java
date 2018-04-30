@@ -1,4 +1,4 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.bombGame;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -8,11 +8,13 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 
+import hr.fer.drinkinggame.GameObject;
+
 /**
  * Created by Niko on 23.3.2018..
  */
 
-public class Category implements GameObject  {
+public class Category implements GameObject {
     private String name;
     private Point point;
 
@@ -36,7 +38,7 @@ public class Category implements GameObject  {
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);
-        canvas.drawText(name, 50, point.y, paint);
+        canvas.drawText(name, point.x, point.y, paint);
 
 
 

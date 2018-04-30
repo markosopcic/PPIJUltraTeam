@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import hr.fer.drinkinggame.pantomime.Pantomime;
+import hr.fer.drinkinggame.bombGame.BombGame;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
@@ -27,7 +27,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
         //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
-        currentGame=new Pantomime(getResources().getDisplayMetrics());
+        //currentGame=new Pantomime(getResources().getDisplayMetrics());
+        currentGame=new BombGame(context,getResources().getDisplayMetrics());
         Log.d("wat","wut");
     }
 
