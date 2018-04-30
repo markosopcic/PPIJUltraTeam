@@ -7,7 +7,12 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameActivity extends Activity {
+
+    public ArrayList<String> nadimci;
 
     private GamePanel view=null;
     @Override
@@ -17,6 +22,7 @@ public class GameActivity extends Activity {
         view=new GamePanel(this);
         setContentView(view);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        nadimci = (ArrayList<String>) getIntent().getSerializableExtra("nadimci");
     }
 
     @Override

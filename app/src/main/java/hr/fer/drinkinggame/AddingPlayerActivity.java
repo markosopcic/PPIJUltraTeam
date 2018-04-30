@@ -16,12 +16,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.fer.drinkinggame.menus.MainMenuActivity;
+
 public class AddingPlayerActivity extends Activity {
 
     private LinearLayout parentLinearLayout;
 
 
-    private List<String> nadimci;
+    private ArrayList<String> nadimci;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +66,9 @@ public class AddingPlayerActivity extends Activity {
         }
 
         finish();
-        startActivity(new Intent(getApplicationContext(), GameActivity.class));
+        Intent startGameActivityIntent = new Intent(new Intent(getApplicationContext(), GameActivity.class));
+        startGameActivityIntent.putExtra("nadimci", nadimci);
+        startActivity(startGameActivityIntent);
     }
-
-
 
 }
