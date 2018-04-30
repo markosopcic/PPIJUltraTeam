@@ -24,7 +24,7 @@ public class MainThread extends Thread {
         long waitTime;
         long targetTime = 1000/MAX_FPS;
 
-        while(running) {
+        while(this.running) {
             startTime = System.nanoTime();
             canvas = null;
 

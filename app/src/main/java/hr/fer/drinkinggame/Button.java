@@ -39,6 +39,8 @@ public class Button implements GameObject {
         return p;
     }
 
+    public void setPoint(Point p) {this.p = p;}
+
     public boolean isButtonPressed(MotionEvent event){
         if(event.getX()>this.p.x && event.getX()<(this.p.x+this.button.getWidth()) && event.getY()>this.p.y && (event.getY()<this.p.y+this.button.getHeight())){
             return true;
