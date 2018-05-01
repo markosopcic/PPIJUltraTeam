@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\nursi\AndroidStudioProjects\PPIJUltraTeam\DrinkingGame.iml" filepath="C:\Users\nursi\AndroidStudioProjects\PPIJUltraTeam\DrinkingGame.iml" />
-      <module fileurl="file://C:\Users\roman\StudioProjects\PPIJUltraTeam\DrinkingGame.iml" filepath="C:\Users\roman\StudioProjects\PPIJUltraTeam\DrinkingGame.iml" />
       <module fileurl="file://$PROJECT_DIR$/PPIJUltraTeam.iml" filepath="$PROJECT_DIR$/PPIJUltraTeam.iml" />
-      <module fileurl="file://C:\Users\Marko\Documents\DrinkingGame\PPIJUltraTeam.iml" filepath="C:\Users\Marko\Documents\DrinkingGame\PPIJUltraTeam.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
