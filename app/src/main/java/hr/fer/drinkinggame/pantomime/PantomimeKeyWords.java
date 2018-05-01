@@ -71,7 +71,7 @@ public class PantomimeKeyWords {
         String temp;
         do {
             Random rand = new Random();
-            temp = keyWords.get(rand.nextInt(keyWords.size() - 1));
+            temp = PantomimeKeyWords.keyWords.get(rand.nextInt(keyWords.size() - 1));
         } while(keyWords.contains(temp));
         return temp;
     }

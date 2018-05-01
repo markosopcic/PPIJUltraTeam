@@ -52,6 +52,10 @@ public class TextField implements GameObject {
         return this.point;
     }
 
+    public void setColor(int color){
+        this.paint.setColor(color);
+    }
+
     @Override
     public void draw(Canvas canvas) {
         canvas.drawText(text, point.x, point.y, paint);

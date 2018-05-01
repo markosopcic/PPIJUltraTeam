@@ -20,23 +20,31 @@ public class Clock implements GameObject {
     TextField counterText;
     int counter;
     PointF point;
+    boolean running;
 
     long startTime;
     long lastChange;
+
     // zajebana stvar
-    public Clock(int counter, TextPaint paint, PointF point, Pantomime game){
+    public Clock(int counter, TextPaint paint, PointF point, Pantomime game) {
         this.game = game;
-        this.counter  = counter;
+        this.counter = counter;
         this.point = point;
         this.counterText = new TextField(String.valueOf(this.counter), paint, this.point);
+        this.running = false;
     }
 
-    public void start(){
+    public void start() {
         this.startTime = System.nanoTime();
         this.lastChange = this.startTime;
+        this.running = true;
     }
 
-    public void setPoint(PointF point){
+    public void finish() {
+        this.running = false;
+    }
+
+    public void setPoint(PointF point) {
         this.point = point;
     }
 
@@ -47,13 +55,15 @@ public class Clock implements GameObject {
 
     @Override
     public void update() {
-        long currentTime = System.nanoTime();
-        if (counter == 0) {
-            //game.setRunning(false);
-        }
-        if ((currentTime-lastChange) >= 1000000000){
-            lastChange = currentTime;
-            this.counterText.setText(String.valueOf(--this.counter));
+        if (running) {
+            long currentTime = System.nanoTime();
+            if (counter == 0) {
+                finish();
+            }
+            if ((currentTime - lastChange) >= 1000000000) {
+                lastChange = currentTime;
+                this.counterText.setText(String.valueOf(--this.counter));
+            }
         }
     }
 }

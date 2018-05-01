@@ -29,8 +29,9 @@ import hr.fer.drinkinggame.generalobjects.Line;
 
 public class Pantomime extends Game {
     private List<String> keyWords;
-    private List<PantomimeButton> buttons;
+    private List<Button> buttons;
     private MainThread thread;
+    private AssetManager am;
     private boolean changedField;
     Context context;
 
@@ -43,7 +44,7 @@ public class Pantomime extends Game {
         this.keyWords.addAll(PantomimeKeyWords.getRandomKeyWords());
         this.changedField = false;
 
-        AssetManager am = context.getAssets();
+        am = context.getAssets();
 //        if(test){
 //            Paint paint = new Paint();
 //            paint.setColor(Color.RED);
@@ -57,12 +58,12 @@ public class Pantomime extends Game {
         TextPaint textPaint = initializeTextPaint(dm.density);
         Paint.FontMetrics fm = textPaint.getFontMetrics();
         setBackground(dm);
-        addKeyWords(am, dm, fm, textPaint);
-        initializeClock(dm, fm, textPaint);
-
+        float drawingHeight = addTextFieldsAndButtons(am, dm, fm, textPaint);
+        Clock clock = initializeClock(dm, fm, textPaint);
+        createStartButton(am, dm, drawingHeight, clock);
     }
 
-    public void addKeyWords(AssetManager am, DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
+    public float addTextFieldsAndButtons(AssetManager am, DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
         float density = dm.density;
         float x = dm.widthPixels/2;
         float y = dm.heightPixels/2;
@@ -94,23 +95,17 @@ public class Pantomime extends Game {
             int buttonWidth = (int)(ascent + descent);
             int buttonHeight = (int) (ascent+descent);
             Point buttonPoint = new Point((int)(drawingWidth + marginTaB * 2 + textWidth/2), (int)(drawingHeight - ascent));
-            String image = "images/iksde.png";
-            PantomimeButton button = new PantomimeButton(am, image, text, buttonWidth, buttonHeight, buttonPoint){
-                public void doTheDeed(Pantomime game){
-                    String temp = PantomimeKeyWords.getRandomKeyWord(game.keyWords);
-                    float oldWidth = field.getTextWidth();
-                    float newWidth = field.getTextWidth(temp);
-                    this.field.setText(temp);
-                    this.button.setPoint(new Point(this.button.getPoint().x + (int)(newWidth - oldWidth), this.button.getPoint().y));
-                    this.field.setPoint(new PointF(this.field.getPoint().x + (int)(newWidth - oldWidth),this.field.getPoint().y));
-                    game.changedField = true;
-                }
-            };
+            Button button = null;
+            try{
+            button = new TextChangeButton(am.open("images/iksde.png"), buttonWidth, buttonHeight, buttonPoint, text);}
+            catch (Exception e){
+            }
             this.gameObjects.add(button);
             this.buttons.add(button);
 
             drawingHeight += marginTaB + descent;
         }
+        return drawingHeight;
     }
 
     private TextPaint initializeTextPaint(float density){
@@ -121,7 +116,7 @@ public class Pantomime extends Game {
         return textPaint;
     }
 
-    private void initializeClock(DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
+    private Clock initializeClock(DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
         float density = dm.density;
 
         float width = textPaint.measureText("10");
@@ -130,9 +125,53 @@ public class Pantomime extends Game {
         float x = dm.widthPixels - margin - width;
         float y = margin + height/2;
 
-        Clock clock = new Clock(10, textPaint, new PointF(x,y), this);
+        Clock clock = new Clock(60, textPaint, new PointF(x,y), this);
         this.gameObjects.add(clock);
-        clock.start();
+        return clock;
+    }
+
+    private void createStartButton(AssetManager am, DisplayMetrics dm, float drawingHeight, Clock clock){
+        float x = dm.widthPixels/2;
+        float y = dm.heightPixels/2;
+        float startButtonWidth = x;
+        float startButtonHeight = ((y*2) - drawingHeight)/2;
+        Point startButtonPoint = new Point((int)(x - startButtonWidth/2),(int) (drawingHeight + startButtonHeight/2));
+        Button startButton = null;
+        try{
+            startButton = new StartButton(am.open("images/startde.png"),startButtonPoint, (int)startButtonWidth, (int)startButtonHeight, clock);}
+        catch (Exception e){
+        }
+        this.buttons.add(startButton);
+        this.gameObjects.add(startButton);
+    }
+
+    private void getRidOfTextChangeButtons(){
+        List<Button> tempButtons = new ArrayList<>();
+        for(Button temp : buttons){
+            if (temp instanceof TextChangeButton)
+                tempButtons.add(temp);
+        }
+        for(Button temp : tempButtons){
+            buttons.remove(temp);
+            gameObjects.remove(temp);
+            try {
+                buttons.add(new TextGuessedButton(am.open("images/yesde.png"), ((TextChangeButton)temp)));
+            }
+            catch (Exception e){
+            }
+        }
+    }
+
+    private void getRidOfTextGuessedButtons(){
+        List<Button> tempButtons = new ArrayList<>();
+        for(Button temp : buttons){
+            if (temp instanceof TextGuessedButton)
+                tempButtons.add(temp);
+        }
+        for(Button temp : tempButtons){
+            buttons.remove(temp);
+            gameObjects.remove(temp);
+        }
     }
 
     private void setBackground(DisplayMetrics dm){
@@ -146,9 +185,40 @@ public class Pantomime extends Game {
 
     @Override
     public void handleTouch(MotionEvent event) {
-        for(PantomimeButton button : this.buttons){
-            if (button.isButtonPressed(event)){
-                button.doTheDeed(this);
+        for(Button button : this.buttons){
+            if (button.isButtonPressed(event)) {
+                if (button instanceof TextChangeButton) {
+//                    if(changedField)
+//                        break;
+//                    changedField = true;
+                    String temp = PantomimeKeyWords.getRandomKeyWord(keyWords);
+                    TextField text = ((TextChangeButton) button).text;
+                    float oldWidth = text.getTextWidth();
+                    float newWidth = text.getTextWidth(temp);
+                    text.setText(temp);
+
+                    PointF oldTextPoint = text.getPoint();
+                    text.setPoint(new PointF(oldTextPoint.x + oldWidth / 2 - newWidth / 2, oldTextPoint.y));
+
+                    Point oldButtonPoint = button.getPoint();
+                    button.setPoint(new Point((int) (oldButtonPoint.x - oldWidth / 2 + newWidth / 2), oldButtonPoint.y));
+                    getRidOfTextChangeButtons();
+                } else if (button instanceof StartButton) {
+                    ((StartButton) button).start();
+                    buttons.remove(button);
+                    gameObjects.remove(button);
+                    getRidOfTextChangeButtons();
+                    for (Button temp : buttons) {
+                        if(temp instanceof TextGuessedButton){
+                            gameObjects.add(temp);
+                        }
+                    }
+                } else if (button instanceof TextGuessedButton){
+                    ((TextGuessedButton) button).guessed();
+                    gameObjects.remove(button);
+                    buttons.remove(button);
+                }
+                break;
             }
         }
     }

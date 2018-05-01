@@ -2,10 +2,13 @@ package hr.fer.drinkinggame;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
+
+import java.io.InputStream;
 
 /**
  * Created by Marko on 23.3.2018..
@@ -18,6 +21,17 @@ public class Button implements GameObject {
 
     public Button(Bitmap d,Point pos){
         button=d;
+        p=pos;
+    }
+
+    public Button(InputStream is, Point pos, int width, int height){
+        button = null;
+        try {
+            button = BitmapFactory.decodeStream(is);
+            button = Bitmap.createScaledBitmap(button, width, height, false);
+        }
+        catch (Exception e){
+        }
         p=pos;
     }
 
