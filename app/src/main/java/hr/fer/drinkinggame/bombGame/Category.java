@@ -27,14 +27,14 @@ public class Category implements GameObject {
         this.point = point;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public void draw(Canvas canvas) {
-        //malo cudno ali radi
 
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawPaint(paint);
 
         paint.setColor(Color.BLACK);
         paint.setTextSize(50);

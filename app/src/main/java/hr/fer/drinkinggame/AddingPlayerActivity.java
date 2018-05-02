@@ -21,8 +21,6 @@ import hr.fer.drinkinggame.menus.MainMenuActivity;
 public class AddingPlayerActivity extends Activity {
 
     private LinearLayout parentLinearLayout;
-
-
     private ArrayList<String> nadimci;
 
     @Override
@@ -58,17 +56,27 @@ public class AddingPlayerActivity extends Activity {
     public void onDone(View view) {
         int size = parentLinearLayout.getChildCount()-3;
         for(int i=0;i<size;++i){
+
             LinearLayout v = (LinearLayout) parentLinearLayout.getChildAt(i+1);
-            EditText editTekstOdgovor = (EditText) v.getChildAt(0);
-            String tekstOdgovor = editTekstOdgovor.getText().toString();
-            String nadimak = tekstOdgovor;
-            nadimci.add(nadimak);
+            EditText editTekstNadimak = (EditText) v.getChildAt(0);
+            String tekstNadimak = editTekstNadimak.getText().toString();
+            if(tekstNadimak.isEmpty()){
+                Toast.makeText(this, "Igrač mora imati neko ime", Toast.LENGTH_SHORT).show();
+                editTekstNadimak.requestFocus();
+                return;
+            }
+            nadimci.add(tekstNadimak);
         }
 
         finish();
-        Intent startGameActivityIntent = new Intent(new Intent(getApplicationContext(), GameActivity.class));
-        startGameActivityIntent.putExtra("nadimci", nadimci);
-        startActivity(startGameActivityIntent);
+        if(nadimci==null || nadimci.isEmpty() || nadimci.size() < 2){
+            Toast.makeText(this, "Molimo Vas unesite barem dva igrača", Toast.LENGTH_SHORT).show();
+            startActivity( new Intent(new Intent(getApplicationContext(), AddingPlayerActivity.class)));
+        }else {
+            Intent startGameActivityIntent = new Intent(new Intent(getApplicationContext(), GameActivity.class));
+            startGameActivityIntent.putExtra("nadimci", nadimci);
+            startActivity(startGameActivityIntent);
+        }
     }
 
 }

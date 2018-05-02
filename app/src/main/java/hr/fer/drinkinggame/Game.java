@@ -13,8 +13,7 @@ import java.util.List;
 
 public abstract class Game implements GameObject{
     protected List<GameObject> gameObjects=new ArrayList<>();
-
-
+  
     public void draw(Canvas canvas){
         List<GameObject> toDraw=new ArrayList<>(gameObjects);
        for(GameObject obj:toDraw){

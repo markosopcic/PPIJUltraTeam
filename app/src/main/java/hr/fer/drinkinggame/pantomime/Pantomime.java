@@ -34,15 +34,17 @@ public class Pantomime extends Game {
     private AssetManager am;
     private boolean changedField;
     Context context;
+    private ArrayList<String> nadimci;
 
 
-    public Pantomime(Context context, DisplayMetrics dm, MainThread thread) {
+    public Pantomime(Context context, DisplayMetrics dm, MainThread thread, ArrayList<String> nadimci) {
         this.context = context;
         this.thread = thread;
         this.keyWords = new ArrayList<>();
         this.buttons = new ArrayList<>();
         this.keyWords.addAll(PantomimeKeyWords.getRandomKeyWords());
         this.changedField = false;
+        this.nadimci=nadimci;
 
         am = context.getAssets();
 //        if(test){

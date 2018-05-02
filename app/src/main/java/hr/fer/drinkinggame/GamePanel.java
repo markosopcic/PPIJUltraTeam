@@ -8,6 +8,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 import hr.fer.drinkinggame.bombGame.BombGame;
 
 
@@ -16,19 +18,21 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Game currentGame;
     private Context context;
     public boolean paused=false;
+    public ArrayList<String> nadimci;
 
-    public GamePanel(Context context) {
+    public GamePanel(Context context, ArrayList<String> nadimci) {
         super(context);
         this.context = context;
+        this.nadimci = nadimci;
 
         getHolder().addCallback(this);
 
         thread = new MainThread(getHolder(),this);
 
         setFocusable(true);
-        //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics());
-        //currentGame=new Pantomime(getResources().getDisplayMetrics());
-        currentGame=new BombGame(context,getResources().getDisplayMetrics());
+        //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics(), nadimci);
+        //currentGame=new Pantomime(getResources().getDisplayMetrics(), nadimci);
+        currentGame=new BombGame(context,getResources().getDisplayMetrics(), nadimci);
         Log.d("wat","wut");
     }
 
