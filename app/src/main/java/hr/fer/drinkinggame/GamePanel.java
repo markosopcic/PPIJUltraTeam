@@ -11,6 +11,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 
 import hr.fer.drinkinggame.bombGame.BombGame;
+import hr.fer.drinkinggame.pantomime.Pantomime;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
@@ -31,8 +32,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         setFocusable(true);
         //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics(), nadimci);
-        //currentGame=new Pantomime(getResources().getDisplayMetrics(), nadimci);
-        currentGame=new BombGame(context,getResources().getDisplayMetrics(), nadimci);
+        currentGame=new Pantomime(context, getResources().getDisplayMetrics(), thread, nadimci);
+        //currentGame=new BombGame(context,getResources().getDisplayMetrics(), nadimci);
         Log.d("wat","wut");
     }
 

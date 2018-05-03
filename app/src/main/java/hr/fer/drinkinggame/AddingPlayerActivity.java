@@ -34,6 +34,7 @@ public class AddingPlayerActivity extends Activity {
 
         nadimci = new ArrayList<String>();
 
+
     }
 
 

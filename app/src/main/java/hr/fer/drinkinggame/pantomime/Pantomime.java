@@ -15,13 +15,17 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
+import org.w3c.dom.Text;
+
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.MainThread;
 import hr.fer.drinkinggame.generalobjects.Background;
 import hr.fer.drinkinggame.generalobjects.Line;
+import hr.fer.drinkinggame.generalobjects.Picture;
 
 /**
  * Created by roman on 23-Mar-18.
@@ -29,43 +33,98 @@ import hr.fer.drinkinggame.generalobjects.Line;
 
 public class Pantomime extends Game {
     private List<String> keyWords;
-    private List<Button> buttons;
-    private MainThread thread;
-    private AssetManager am;
-    private boolean changedField;
-    Context context;
     private ArrayList<String> nadimci;
+
+    private List<Button> buttons;
+    private List<Button> buttonsToAdd;
+
+    private AssetManager am;
+    private DisplayMetrics dm;
+    private Context context;
+
+
+
+    private float drawingHeight;
+    private int guessed;
 
 
     public Pantomime(Context context, DisplayMetrics dm, MainThread thread, ArrayList<String> nadimci) {
-        this.context = context;
-        this.thread = thread;
         this.keyWords = new ArrayList<>();
-        this.buttons = new ArrayList<>();
         this.keyWords.addAll(PantomimeKeyWords.getRandomKeyWords());
-        this.changedField = false;
+
+        this.buttons = new ArrayList<>();
+        this.buttonsToAdd = new ArrayList<>();
+
         this.nadimci=nadimci;
 
         am = context.getAssets();
-//        if(test){
-//            Paint paint = new Paint();
-//            paint.setColor(Color.RED);
-//            float x = dm.widthPixels/2;
-//            float y = dm.heightPixels/2;
-//            setBackground(dm);
-//            this.gameObjects.add(new Line(x,0, x,y*2, paint));
-//            this.gameObjects.add(new Line(0, y, x*2,y, paint));
-//            this.gameObjects.add(createButton(am,"images/iksde.png", (int)x, (int)y, 80, 80));
+        this.dm = dm;
+        this.context = context;
 
-        TextPaint textPaint = initializeTextPaint(dm.density);
-        Paint.FontMetrics fm = textPaint.getFontMetrics();
-        setBackground(dm);
-        float drawingHeight = addTextFieldsAndButtons(am, dm, fm, textPaint);
-        Clock clock = initializeClock(dm, fm, textPaint);
-        createStartButton(am, dm, drawingHeight, clock);
+        this.drawingHeight = 0;
+        this.guessed = 0;
+
+        setBackground();
+        addPantomimeSign();
+        addPlayers();
+        Clock clock = initializeClock();
+        addTextFieldsAndButtons();
+        createStartButton(clock);
+
+
+
     }
 
-    public float addTextFieldsAndButtons(AssetManager am, DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
+    private void setBackground(){
+        Background background = new Background(dm, Color.BLACK);
+        this.gameObjects.add(background);
+    }
+
+    public void addPantomimeSign(){
+        float x = dm.widthPixels;
+        float y = dm.heightPixels;
+        float margin = 5 * dm.density;
+        Picture pantomime = null;
+        // new Point((int)(x/4), (int)(0+ margin))
+        try{
+        pantomime = new Picture(am.open("pantomime/pantomime2.png"), new Point(0, (int)(margin)), (int)(x) ,(int)(66*dm.density));
+        }
+        catch (Exception e){
+        }
+        this.gameObjects.add(pantomime);
+        drawingHeight += 66 * dm.density;
+    }
+
+    public void addPlayers(){
+        TextPaint textPaint = initializeTextPaint(dm.density, 20, Color.WHITE);
+        Paint.FontMetrics fm = textPaint.getFontMetrics();
+        float margin = 5 * dm.density;
+        String playerOne = "Objašnjava:" + nadimci.get(0);
+        String playerTwo = "Pogađa:" + nadimci.get(1);
+        TextField explainer = new TextField(playerOne, textPaint, new PointF(margin,drawingHeight + margin - fm.ascent));
+        // krenemo od drawingHeighta dodamo marginu razlike i pomaknemo za ascent
+        TextField solver = new TextField(playerTwo, textPaint, new PointF(margin, drawingHeight + margin * 2 - fm.ascent * 2 + fm.descent));
+        // pomaknemo se gdje je prvi te otamo micemo za jedan desent marginu i ascent
+        this.gameObjects.add(explainer);
+        this.gameObjects.add(solver);
+    }
+
+    private Clock initializeClock(){
+        TextPaint textPaint = initializeTextPaint(dm.density, 40, Color.WHITE);
+        Paint.FontMetrics fm = textPaint.getFontMetrics();
+
+        float width = textPaint.measureText("60");
+        float margin = 5 * dm.density;
+
+        Clock clock = new Clock(60, textPaint, new PointF(dm.widthPixels - margin - width,drawingHeight - fm.ascent + margin), this);
+        this.gameObjects.add(clock);
+        return clock;
+    }
+
+    public void addTextFieldsAndButtons(){
+        TextPaint textPaint = initializeTextPaint(dm.density, 30, Color.WHITE);
+        Paint.FontMetrics fm = textPaint.getFontMetrics();
+
         float density = dm.density;
         float x = dm.widthPixels/2;
         float y = dm.heightPixels/2;
@@ -74,10 +133,10 @@ public class Pantomime extends Game {
         float ascent = -fm.ascent;
         float marginTaB = 5 * density; // top and bottom margin
 
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        this.gameObjects.add(new Line(x,0, x,y*2, paint));
-        this.gameObjects.add(new Line(0, y, x*2,y, paint));
+//        Paint paint = new Paint();
+//        paint.setColor(Color.RED);
+//        this.gameObjects.add(new Line(x,0, x,y*2, paint));
+//        this.gameObjects.add(new Line(0, y, x*2,y, paint));
 
 //        this.gameObjects.add(new TextField("Ovo je proba", textPaint, new PointF(x-textPaint.measureText("Ovo je proba")/2, y)));
 //        this.gameObjects.add(new Line(x-textPaint.measureText("Ovo je proba")/2, y, x-textPaint.measureText("Ovo je proba")/2, y-ascent, paint));
@@ -86,6 +145,7 @@ public class Pantomime extends Game {
         float drawingHeight = (float) (y - descent * 2 - marginTaB * 2 - ascent * 2 + marginTaB/2);
         // x na pola, y na vrhu gjde krece zapis prvog
         for (String temp : this.keyWords){
+            textPaint = initializeTextPaint(dm.density, 30, Color.WHITE);
             float textWidth = textPaint.measureText(temp);
             //y se mice prema dole jer pisanje texta krece iz lijevog donjeg kuta
             drawingHeight += ascent;
@@ -99,7 +159,7 @@ public class Pantomime extends Game {
             Point buttonPoint = new Point((int)(drawingWidth + marginTaB * 2 + textWidth/2), (int)(drawingHeight - ascent));
             Button button = null;
             try{
-            button = new TextChangeButton(am.open("images/iksde.png"), buttonWidth, buttonHeight, buttonPoint, text);}
+            button = new TextChangeButton(am.open("pantomime/change_word.png"), buttonWidth, buttonHeight, buttonPoint, text);}
             catch (Exception e){
             }
             this.gameObjects.add(button);
@@ -107,32 +167,18 @@ public class Pantomime extends Game {
 
             drawingHeight += marginTaB + descent;
         }
-        return drawingHeight;
+        this.drawingHeight = drawingHeight;
     }
 
-    private TextPaint initializeTextPaint(float density){
+    private TextPaint initializeTextPaint(float density, int size, int color){
         TextPaint textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(22 * density);
-        textPaint.setColor(Color.WHITE);
+        textPaint.setTextSize(size * density);
+        textPaint.setColor(color);
         return textPaint;
     }
 
-    private Clock initializeClock(DisplayMetrics dm, Paint.FontMetrics fm, TextPaint textPaint){
-        float density = dm.density;
-
-        float width = textPaint.measureText("10");
-        float height = fm.descent - fm.ascent;
-        float margin = 5 * density;
-        float x = dm.widthPixels - margin - width;
-        float y = margin + height/2;
-
-        Clock clock = new Clock(60, textPaint, new PointF(x,y), this);
-        this.gameObjects.add(clock);
-        return clock;
-    }
-
-    private void createStartButton(AssetManager am, DisplayMetrics dm, float drawingHeight, Clock clock){
+    private void createStartButton(Clock clock){
         float x = dm.widthPixels/2;
         float y = dm.heightPixels/2;
         float startButtonWidth = x;
@@ -140,7 +186,7 @@ public class Pantomime extends Game {
         Point startButtonPoint = new Point((int)(x - startButtonWidth/2),(int) (drawingHeight + startButtonHeight/2));
         Button startButton = null;
         try{
-            startButton = new StartButton(am.open("images/startde.png"),startButtonPoint, (int)startButtonWidth, (int)startButtonHeight, clock);}
+            startButton = new StartButton(am.open("pantomime/start.png"),startButtonPoint, (int)startButtonWidth, (int)startButtonHeight, clock);}
         catch (Exception e){
         }
         this.buttons.add(startButton);
@@ -157,32 +203,36 @@ public class Pantomime extends Game {
             buttons.remove(temp);
             gameObjects.remove(temp);
             try {
-                buttons.add(new TextGuessedButton(am.open("images/yesde.png"), ((TextChangeButton)temp)));
+                buttonsToAdd.add(new TextGuessedButton(am.open("pantomime/guessed_word.png"), ((TextChangeButton)temp)));
             }
             catch (Exception e){
             }
         }
     }
 
+    public void finish(){
+        TextPaint textPaint = initializeTextPaint(dm.density, 30, Color.WHITE);
+        float x = dm.widthPixels;
+        float y = dm.heightPixels;
+        String text1 = "Pogodili ste " + Integer.toString(guessed) + "/4.";
+        String text2 = "Piješ " + Integer.toString(4-guessed) + ", dijeliš " + Integer.toString(guessed) + ".";
+        gameObjects.add(new TextField(text1, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4)));
+        gameObjects.add(new TextField(text2, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4 - textPaint.ascent() + textPaint.descent() + dm.density * 5)));
+        getRidOfTextGuessedButtons();
+    }
+
     private void getRidOfTextGuessedButtons(){
         List<Button> tempButtons = new ArrayList<>();
         for(Button temp : buttons){
-            if (temp instanceof TextGuessedButton)
+            if (temp instanceof TextGuessedButton) {
                 tempButtons.add(temp);
+                ((TextGuessedButton) temp).text.setColor(Color.RED);
+            }
         }
         for(Button temp : tempButtons){
             buttons.remove(temp);
             gameObjects.remove(temp);
         }
-    }
-
-    private void setBackground(DisplayMetrics dm){
-        Background background = new Background(dm, Color.BLACK);
-        this.gameObjects.add(background);
-    }
-
-    public void setRunning(Boolean running){
-        thread.setRunning(running);
     }
 
     @Override
@@ -210,15 +260,25 @@ public class Pantomime extends Game {
                     buttons.remove(button);
                     gameObjects.remove(button);
                     getRidOfTextChangeButtons();
-                    for (Button temp : buttons) {
+                    for (Button temp : buttonsToAdd) {
                         if(temp instanceof TextGuessedButton){
                             gameObjects.add(temp);
+                            buttons.add(temp);
                         }
                     }
                 } else if (button instanceof TextGuessedButton){
                     ((TextGuessedButton) button).guessed();
                     gameObjects.remove(button);
                     buttons.remove(button);
+                    guessed++;
+                    if (guessed == 4){
+                        for (GameObject temp : this.gameObjects) {
+                            if (temp instanceof Clock){
+                                ((Clock) temp).finish();
+                                break;
+                            }
+                        }
+                    }
                 }
                 break;
             }
