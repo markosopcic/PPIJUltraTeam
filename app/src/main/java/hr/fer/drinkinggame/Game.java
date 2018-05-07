@@ -13,6 +13,8 @@ import java.util.List;
 
 public abstract class Game implements GameObject{
     protected List<GameObject> gameObjects=new ArrayList<>();
+
+    protected boolean finished=false;
   
     public void draw(Canvas canvas){
         List<GameObject> toDraw=new ArrayList<>(gameObjects);
@@ -29,4 +31,8 @@ public abstract class Game implements GameObject{
     }
 
     public abstract void handleTouch(MotionEvent event);
+
+    public boolean isFinished() {
+        return finished;
+    }
 }

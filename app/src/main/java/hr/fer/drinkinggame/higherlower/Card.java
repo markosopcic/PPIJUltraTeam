@@ -1,10 +1,11 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.higherlower;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
+
+import hr.fer.drinkinggame.GameObject;
 
 /**
  * Created by Marko on 22.3.2018..

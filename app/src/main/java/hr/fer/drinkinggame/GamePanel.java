@@ -3,15 +3,13 @@ package hr.fer.drinkinggame;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
 
-import hr.fer.drinkinggame.bombGame.BombGame;
-import hr.fer.drinkinggame.pantomime.Pantomime;
+import hr.fer.drinkinggame.higherlower.HigherLowerGame;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
@@ -31,10 +29,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         thread = new MainThread(getHolder(),this);
 
         setFocusable(true);
-        //currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics(), nadimci);
-        currentGame=new Pantomime(context, getResources().getDisplayMetrics(), thread, nadimci);
+        currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics(), nadimci);
+       // currentGame=new Pantomime(context, getResources().getDisplayMetrics(), thread, nadimci);
         //currentGame=new BombGame(context,getResources().getDisplayMetrics(), nadimci);
-        Log.d("wat","wut");
     }
 
 
@@ -68,7 +65,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-       if(currentGame!=null) currentGame.update();
+       if(currentGame!=null)
+           currentGame.update();
      }
 
 

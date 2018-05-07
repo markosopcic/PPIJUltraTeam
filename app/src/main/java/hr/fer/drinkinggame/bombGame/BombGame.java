@@ -10,20 +10,15 @@ import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import hr.fer.drinkinggame.Button;
+import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.Game;
-import hr.fer.drinkinggame.GameActivity;
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.R;
-
-import static hr.fer.drinkinggame.MainThread.canvas;
 
 
 /**

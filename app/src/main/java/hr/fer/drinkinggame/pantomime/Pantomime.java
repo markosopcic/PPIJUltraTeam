@@ -1,12 +1,10 @@
 package hr.fer.drinkinggame.pantomime;
 
-import hr.fer.drinkinggame.Button;
+import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.Game;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -15,16 +13,12 @@ import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 
-import org.w3c.dom.Text;
-
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.MainThread;
 import hr.fer.drinkinggame.generalobjects.Background;
-import hr.fer.drinkinggame.generalobjects.Line;
 import hr.fer.drinkinggame.generalobjects.Picture;
 
 /**
@@ -90,6 +84,7 @@ public class Pantomime extends Game {
         pantomime = new Picture(am.open("pantomime/pantomime2.png"), new Point(0, (int)(margin)), (int)(x) ,(int)(66*dm.density));
         }
         catch (Exception e){
+
         }
         this.gameObjects.add(pantomime);
         drawingHeight += 66 * dm.density;
