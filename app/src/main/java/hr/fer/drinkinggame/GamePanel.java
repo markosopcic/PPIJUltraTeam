@@ -3,20 +3,27 @@ package hr.fer.drinkinggame;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+import hr.fer.drinkinggame.bombGame.BombGame;
 import hr.fer.drinkinggame.higherlower.HigherLowerGame;
+import hr.fer.drinkinggame.pantomime.Pantomime;
 
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+
+    public static final int NUMBER_OF_GAMES=3;
     private MainThread thread;
     private Game currentGame;
     private Context context;
     public boolean paused=false;
+    public int currentGameID=-1;
     public ArrayList<String> nadimci;
 
     public GamePanel(Context context, ArrayList<String> nadimci) {
@@ -26,12 +33,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         getHolder().addCallback(this);
 
-        thread = new MainThread(getHolder(),this);
 
         setFocusable(true);
-        currentGame=new HigherLowerGame(context,getResources().getDisplayMetrics(), nadimci);
-       // currentGame=new Pantomime(context, getResources().getDisplayMetrics(), thread, nadimci);
-        //currentGame=new BombGame(context,getResources().getDisplayMetrics(), nadimci);
+        setupNewGame();
     }
 
 
@@ -65,8 +69,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     }
 
     public void update() {
-       if(currentGame!=null)
-           currentGame.update();
+       if(currentGame!=null) {
+           if(!currentGame.finished)
+                currentGame.update();
+           else
+               setupNewGame();
+       }
      }
 
 
@@ -77,7 +85,30 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             canvas.drawColor(Color.WHITE);
             if (currentGame != null) currentGame.draw(canvas);
         }
+    }
 
+    private void setupNewGame(){
+        Random rand=new Random();
+        DisplayMetrics dm=context.getResources().getDisplayMetrics();
 
+        int newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        switch(newGameID){
+            case 0:{
+                currentGameID=0;
+                currentGame=new BombGame(context,dm,nadimci);
+                break;
+            }
+            case 1:{
+                currentGameID=1;
+                currentGame=new Pantomime(context,dm,thread,nadimci);
+                break;
+            }
+            case 2:{
+                currentGameID=2;
+                currentGame=new HigherLowerGame(context,dm,nadimci);
+                break;
+            }
+        }
     }
 }

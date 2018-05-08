@@ -10,6 +10,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
+import android.os.Looper;
 import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
@@ -125,7 +126,6 @@ public class BombGame extends Game {
         buttonNext = new Button(lowerBitmap,lowerPoint);
 
         this.gameObjects.add(buttonNext);
-
         new MyCountDownTimer(radnomNumber*1000, 1000, this.gameObjects , manager) {
             //List<GameObject> gameObjects = null;
 
@@ -153,6 +153,7 @@ public class BombGame extends Game {
                     }
 
                     public void onFinish() {
+
                         ring.stop();
                     }
                 }.start();

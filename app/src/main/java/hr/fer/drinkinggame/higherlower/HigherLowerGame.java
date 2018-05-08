@@ -19,7 +19,7 @@ import hr.fer.drinkinggame.R;
  */
 
 public class HigherLowerGame extends Game {
-    private int numOfRounds=5;
+    private int numOfRounds;
     private CardDeck deck;
     private Card current;
     private Card newCard;
@@ -50,6 +50,7 @@ public class HigherLowerGame extends Game {
         currText=new CurrentPlayerText(dm.widthPixels);
         currText.setCurrent(names.get(currentPlayerIndex));
         gameObjects.add(currText);
+        numOfRounds=names.size()*(new Random().nextInt(2)+2);
 
 
 
@@ -78,7 +79,7 @@ public class HigherLowerGame extends Game {
     private int currentPlayerIndex;
     @Override
     public void handleTouch(MotionEvent event) {
-        if(animating) return;
+        if(animating || startWait>0) return;
         if(higher.isButtonPressed(event)){
             newCard=deck.pullCardAtIndex(new Random().nextInt(deck.sizeOfDeck()));
             if(newCard.isHigher(current)){
@@ -110,12 +111,20 @@ public class HigherLowerGame extends Game {
 
     }
 
+    private long startWait=0;
     @Override
     public void update() {
         super.update();
-        if(System.currentTimeMillis()-drinkstart>1000){
+        if(startWait!=0){
+            if(System.currentTimeMillis()-startWait>2000) finished=true;
+            return;
+        }
+        if(drinkstart>0 && System.currentTimeMillis()-drinkstart>1000){
             drinkstart=0;
             gameObjects.remove(drinkText);
+            if(!finished && numOfRounds<=0) {
+                startWait=System.currentTimeMillis();
+            }
         }
         if(animating){
             newCard.changePoint(new Point(newCard.getPoint().x,(int)(newCard.getPoint().y+(System.currentTimeMillis()-oldTime)*speed)));
@@ -125,8 +134,13 @@ public class HigherLowerGame extends Game {
                 this.gameObjects.remove(current);
                 current=newCard;
             }
+
             else{
                 oldTime=System.currentTimeMillis();
+            }
+        }else{
+            if(!finished && numOfRounds<=0) {
+                startWait=System.currentTimeMillis();
             }
         }
     }

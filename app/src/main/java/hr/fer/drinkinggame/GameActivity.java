@@ -52,8 +52,5 @@ public class GameActivity extends Activity {
     }
 
 
-    @Override
-    public void onBackPressed() {
-       // Toast.makeText(GameActivity.this, "PROVA", Toast.LENGTH_LONG).show();
-    }
+
 }

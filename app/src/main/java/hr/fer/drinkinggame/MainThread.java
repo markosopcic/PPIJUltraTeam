@@ -1,6 +1,7 @@
 package hr.fer.drinkinggame;
 
 import android.graphics.Canvas;
+import android.os.Looper;
 import android.view.SurfaceHolder;
 
 
@@ -29,6 +30,7 @@ public class MainThread extends Thread {
             canvas = null;
 
             try {
+                if(Looper.getMainLooper()==null)Looper.prepare();
                 canvas = surfaceHolder.lockCanvas();
                 synchronized (surfaceHolder) {
                     gamePanel.update();

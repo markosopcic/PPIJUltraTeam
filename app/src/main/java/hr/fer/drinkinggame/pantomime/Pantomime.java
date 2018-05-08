@@ -214,6 +214,7 @@ public class Pantomime extends Game {
         gameObjects.add(new TextField(text1, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4)));
         gameObjects.add(new TextField(text2, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4 - textPaint.ascent() + textPaint.descent() + dm.density * 5)));
         getRidOfTextGuessedButtons();
+        finished=true;
     }
 
     private void getRidOfTextGuessedButtons(){
