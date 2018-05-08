@@ -68,11 +68,12 @@ public class AddingPlayerActivity extends Activity {
             nadimci.add(tekstNadimak);
         }
 
-        finish();
+
         if(nadimci==null || nadimci.isEmpty() || nadimci.size() < 2){
             Toast.makeText(this, "Molimo Vas unesite barem dva igrača", Toast.LENGTH_SHORT).show();
-            startActivity( new Intent(new Intent(getApplicationContext(), AddingPlayerActivity.class)));
+            return;
         }else {
+            finish();
             Intent startGameActivityIntent = new Intent(new Intent(getApplicationContext(), GameActivity.class));
             startGameActivityIntent.putExtra("nadimci", nadimci);
             startActivity(startGameActivityIntent);

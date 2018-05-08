@@ -32,6 +32,10 @@ public class TextField implements GameObject {
         this.point = point;
     }
 
+    public String getText() {
+        return text;
+    }
+
     public float getTextWidth(String text){
         return this.paint.measureText(text);
     }

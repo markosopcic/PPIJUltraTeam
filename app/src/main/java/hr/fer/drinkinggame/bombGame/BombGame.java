@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
+import android.graphics.PointF;
 import android.media.MediaPlayer;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.Toast;
@@ -22,6 +26,7 @@ import hr.fer.drinkinggame.Game;
 import hr.fer.drinkinggame.GameActivity;
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.R;
+import hr.fer.drinkinggame.pantomime.TextField;
 
 import static hr.fer.drinkinggame.MainThread.canvas;
 
@@ -33,15 +38,14 @@ import static hr.fer.drinkinggame.MainThread.canvas;
 
 public class BombGame extends Game {
     private List<String> categories;
-    private Category player;
-    private Category category;
+    private TextField player;
+    private TextField category;
     private Bomb bomb;
     private Bomb expl;
     private Button buttonNext;
     private DisplayMetrics dm;
     private boolean explosion;
     private ArrayList<String> nadimci;
-
 
     private Context context;
 
@@ -55,13 +59,30 @@ public class BombGame extends Game {
         explosion=false;
 
         List<String> categoires = new ArrayList<>();
-        categoires.add("Auti");
+        categoires.add("Marke automobila");
+        categoires.add("Nogometni klubovi Hrvatske");
+        categoires.add("Države Afrike");
+        categoires.add("Države Azije");
+        categoires.add("Odjevni predmeti");
+        categoires.add("Marke mobitela");
+        categoires.add("Predmeti na FER-u");
+        categoires.add("Vrste prijevoznih sredstava");
+        categoires.add("Gradovi u Dalmaciji");
+        categoires.add("Vrste vina");
+        categoires.add("Vrste alkoholnih pića");
+        categoires.add("Marke tenisica");
+        categoires.add("Zavodi na FER-u");
+        categoires.add("Klubovi u NBA-u");
+        categoires.add("Dobitnici Oscara");
         categoires.add("Države Europe");
         categoires.add("Fakulteti u Zagrebu");
         categoires.add("Političke stranke u Hrvatskoj");
+        categoires.add("Žanrovi filmova");
+        categoires.add("Realitiy showowi");
+
         int index = ThreadLocalRandom.current().nextInt(0, categoires.size());
 
-        int radnomNumber = ThreadLocalRandom.current().nextInt(8, 16);
+        int radnomNumber = ThreadLocalRandom.current().nextInt(30, 41);
         final MediaPlayer tick = MediaPlayer.create(context, R.raw.ticktick);
 
         //Toast.makeText(context, categoires.get(index), Toast.LENGTH_LONG).show();
@@ -70,14 +91,21 @@ public class BombGame extends Game {
 
         //int textWidth = categoryString.measureText(temp);
 
-        category = new Category(categoryString, new Point(dm.widthPixels*1/10,dm.heightPixels*1/10));
+        TextPaint paint = new TextPaint();
+        paint.setTextSize(90);
+        paint.setColor(Color.GREEN);
+        float textWidth = paint.measureText(categoryString);
+
+        category = new TextField(categoryString, paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*1/10));
 
         //ispis
         this.gameObjects.add(category);
 
         int radnomNumber2 = ThreadLocalRandom.current().nextInt(0, nadimci.size());
 
-        player = new Category(nadimci.get(radnomNumber2), new Point(dm.widthPixels*1/10,dm.heightPixels*3/10));
+        textWidth = paint.measureText(nadimci.get(radnomNumber2));
+
+        player = new TextField(nadimci.get(radnomNumber2), paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*3/10));
 
        this.gameObjects.add(player);
 
@@ -145,16 +173,25 @@ public class BombGame extends Game {
         if(buttonNext.isButtonPressed(event) && explosion==false) {
             //samo za provjeru
            this.gameObjects.remove(player);
-           String trenutniIgrac = player.getName();
+           String trenutniIgrac = player.getText();
            int radnomNumber2 = ThreadLocalRandom.current().nextInt(0, nadimci.size());
            String buduciIgrac = nadimci.get(radnomNumber2);
            while(trenutniIgrac.equals(buduciIgrac)){
                radnomNumber2 = ThreadLocalRandom.current().nextInt(0, nadimci.size());
                buduciIgrac = nadimci.get(radnomNumber2);
            }
-           player = new Category(buduciIgrac, new Point(dm.widthPixels*1/10,dm.heightPixels*3/10));
+            TextPaint paint = new TextPaint();
+            paint.setTextSize(90);
+            paint.setColor(Color.GREEN);
+            float textWidth = paint.measureText(buduciIgrac);
+           player = new TextField(buduciIgrac,paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*3/10));
            this.gameObjects.add(player);
 
         }
     }
+
+
+
+
+
 }
