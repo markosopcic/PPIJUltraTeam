@@ -1,4 +1,4 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.higherlower;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 import android.view.MotionEvent;
 
 import java.io.InputStream;
+
+import hr.fer.drinkinggame.GameObject;
 
 /**
  * Created by Marko on 23.3.2018..

@@ -14,21 +14,16 @@ import android.os.Vibrator;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
-import hr.fer.drinkinggame.Button;
+import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.Game;
-import hr.fer.drinkinggame.GameActivity;
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.R;
 import hr.fer.drinkinggame.pantomime.TextField;
-
-import static hr.fer.drinkinggame.MainThread.canvas;
 
 
 /**

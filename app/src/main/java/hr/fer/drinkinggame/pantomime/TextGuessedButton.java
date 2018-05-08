@@ -5,7 +5,7 @@ import android.graphics.Point;
 
 import java.io.InputStream;
 
-import hr.fer.drinkinggame.Button;
+import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.GameObject;
 
 /**
@@ -21,6 +21,7 @@ public class TextGuessedButton extends Button implements GameObject {
 
     public TextGuessedButton(InputStream is, TextChangeButton button) {
         super(is, button.getPoint(), button.getWidth(), button.getHeight());
+        this.text = button.text;
     }
 
     public void guessed(){

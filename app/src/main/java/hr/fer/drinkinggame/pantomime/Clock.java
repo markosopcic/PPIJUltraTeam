@@ -42,6 +42,7 @@ public class Clock implements GameObject {
 
     public void finish() {
         this.running = false;
+        game.finish();
     }
 
     public void setPoint(PointF point) {

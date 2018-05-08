@@ -1,14 +1,12 @@
-package hr.fer.drinkinggame;
+package hr.fer.drinkinggame.higherlower;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
