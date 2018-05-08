@@ -25,12 +25,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public boolean paused=false;
     public int currentGameID=-1;
     public ArrayList<String> nadimci;
+    private Pregame pregame;
 
     public GamePanel(Context context, ArrayList<String> nadimci) {
         super(context);
         this.context = context;
         this.nadimci = nadimci;
-
         getHolder().addCallback(this);
 
 
@@ -64,11 +64,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(!pregame.finished){
+            pregame.handleTouch(event);
+            return super.onTouchEvent(event);
+        }
         currentGame.handleTouch(event);
         return super.onTouchEvent(event);
     }
 
     public void update() {
+        if(!pregame.finished){
+            pregame.update();
+            return;
+        }
        if(currentGame!=null) {
            if(!currentGame.finished)
                 currentGame.update();
@@ -80,6 +88,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void draw(Canvas canvas) {
+        if(!pregame.finished){
+            pregame.draw(canvas);
+            return;
+        }
         if(!paused) {
             super.draw(canvas);
             canvas.drawColor(Color.WHITE);
@@ -95,16 +107,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
         switch(newGameID){
             case 0:{
+                pregame=new Pregame("Bomba",context);
                 currentGameID=0;
                 currentGame=new BombGame(context,dm,nadimci);
                 break;
             }
             case 1:{
+                pregame=new Pregame("Pantomime",context);
                 currentGameID=1;
                 currentGame=new Pantomime(context,dm,thread,nadimci);
                 break;
             }
             case 2:{
+                pregame=new Pregame("Viša-Niža",context);
                 currentGameID=2;
                 currentGame=new HigherLowerGame(context,dm,nadimci);
                 break;
