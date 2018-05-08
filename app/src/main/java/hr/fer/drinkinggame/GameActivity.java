@@ -20,7 +20,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (view!=null) return;
-        nadimci = (ArrayList<String>) getIntent().getSerializableExtra("nadimci");
+        nadimci = (ArrayList<String>) getIntent().getSerializableExtra("players");
         view=new GamePanel(this, nadimci);
         setContentView(view);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

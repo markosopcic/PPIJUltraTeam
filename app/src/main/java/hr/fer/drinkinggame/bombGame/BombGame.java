@@ -40,15 +40,17 @@ public class BombGame extends Game {
     private Bomb expl;
     private Button buttonNext;
     private DisplayMetrics dm;
-    private boolean explosion;
+    public boolean explosion;
     private ArrayList<String> nadimci;
+    private MediaPlayer tick;
+    private MediaPlayer ring;
+    private  MyCountDownTimer myCountDownTimer1;
 
     private Context context;
 
     public BombGame(final Context context, DisplayMetrics dm, ArrayList<String> nadimci){
 
         AssetManager manager = context.getAssets();
-
         this.dm = dm;
         this.nadimci = nadimci;
 
@@ -79,7 +81,8 @@ public class BombGame extends Game {
         int index = ThreadLocalRandom.current().nextInt(0, categoires.size());
 
         int radnomNumber = ThreadLocalRandom.current().nextInt(30, 41);
-        final MediaPlayer tick = MediaPlayer.create(context, R.raw.ticktick);
+        tick = MediaPlayer.create(context, R.raw.ticktick);
+        ring= MediaPlayer.create(context,R.raw.explosionsound);
 
         //Toast.makeText(context, categoires.get(index), Toast.LENGTH_LONG).show();
 
@@ -101,7 +104,7 @@ public class BombGame extends Game {
 
         textWidth = paint.measureText(nadimci.get(radnomNumber2));
 
-        player = new TextField(nadimci.get(radnomNumber2), paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*3/10));
+        player = new TextField(nadimci.get(radnomNumber2), paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*5/20));
 
        this.gameObjects.add(player);
 
@@ -126,48 +129,17 @@ public class BombGame extends Game {
         buttonNext = new Button(lowerBitmap,lowerPoint);
 
         this.gameObjects.add(buttonNext);
-        new MyCountDownTimer(radnomNumber*1000, 1000, this.gameObjects , manager) {
-            //List<GameObject> gameObjects = null;
 
-            public void setGameObjects(List<GameObject> gameObjects){
-                this.gameObjects = gameObjects;
-            }
 
-            public void onTick(long millisUntilFinished) {
-                tick.start();
-            }
-
-            public void onFinish() {
-                explosion=true;
-                gameObjects.remove(bomb);
-                gameObjects.add(expl);
-                final MediaPlayer ring= MediaPlayer.create(context,R.raw.explosionsound);
-                tick.stop();
-                ring.start();
-                Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(1000);
-
-                new CountDownTimer(5000, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                    }
-
-                    public void onFinish() {
-
-                        ring.stop();
-                    }
-                }.start();
-
-            }
-        }.start();
-
+        myCountDownTimer1 = new MyCountDownTimer(10,this,tick, 1);
+        gameObjects.add(myCountDownTimer1);
+        myCountDownTimer1.start();
 
     }
 
     @Override
     public void handleTouch(MotionEvent event) {
         if(buttonNext.isButtonPressed(event) && explosion==false) {
-            //samo za provjeru
            this.gameObjects.remove(player);
            String trenutniIgrac = player.getText();
            int radnomNumber2 = ThreadLocalRandom.current().nextInt(0, nadimci.size());
@@ -180,10 +152,23 @@ public class BombGame extends Game {
             paint.setTextSize(90);
             paint.setColor(Color.GREEN);
             float textWidth = paint.measureText(buduciIgrac);
-           player = new TextField(buduciIgrac,paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*3/10));
+           player = new TextField(buduciIgrac,paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*5/20));
            this.gameObjects.add(player);
 
         }
+    }
+
+    public void handleExplosion(){
+        gameObjects.remove(bomb);
+        gameObjects.add(expl);
+        gameObjects.remove(myCountDownTimer1);
+        MyCountDownTimer myCountDownTimer2 = new MyCountDownTimer(5,this,ring, 2);
+        gameObjects.add(myCountDownTimer2);
+        myCountDownTimer2.start();
+    }
+
+    public void endOfGame(){
+        finished=true;
     }
 
 

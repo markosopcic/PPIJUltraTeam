@@ -103,6 +103,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         Random rand=new Random();
         DisplayMetrics dm=context.getResources().getDisplayMetrics();
 
+
         int newGameID=rand.nextInt(NUMBER_OF_GAMES);
         while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
         switch(newGameID){
@@ -125,5 +126,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 break;
             }
         }
+
+        
     }
 }

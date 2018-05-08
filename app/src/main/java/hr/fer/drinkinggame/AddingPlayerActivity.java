@@ -21,7 +21,7 @@ import hr.fer.drinkinggame.menus.MainMenuActivity;
 public class AddingPlayerActivity extends Activity {
 
     private LinearLayout parentLinearLayout;
-    private ArrayList<String> nadimci;
+    private ArrayList<String> players;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class AddingPlayerActivity extends Activity {
 
         parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
 
-        nadimci = new ArrayList<String>();
+        players = new ArrayList<String>();
 
 
     }
@@ -66,17 +66,17 @@ public class AddingPlayerActivity extends Activity {
                 editTekstNadimak.requestFocus();
                 return;
             }
-            nadimci.add(tekstNadimak);
+            players.add(tekstNadimak);
         }
 
 
-        if(nadimci==null || nadimci.isEmpty() || nadimci.size() < 2){
+        if(players==null || players.isEmpty() || players.size() < 2){
             Toast.makeText(this, "Molimo Vas unesite barem dva igrača", Toast.LENGTH_SHORT).show();
             return;
         }else {
             finish();
             Intent startGameActivityIntent = new Intent(new Intent(getApplicationContext(), GameActivity.class));
-            startGameActivityIntent.putExtra("nadimci", nadimci);
+            startGameActivityIntent.putExtra("players", players);
             startActivity(startGameActivityIntent);
         }
     }
