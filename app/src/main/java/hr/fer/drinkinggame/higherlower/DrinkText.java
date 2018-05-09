@@ -18,7 +18,6 @@ public class DrinkText implements GameObject {
         this.width=width;
         p.y=y;
         pnt=new Paint();
-        pnt.setColor(Color.RED);
         pnt.setTextSize(width/10);
     }
 

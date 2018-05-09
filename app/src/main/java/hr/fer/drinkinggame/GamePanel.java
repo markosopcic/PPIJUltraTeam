@@ -111,10 +111,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
         int newGameID=rand.nextInt(NUMBER_OF_GAMES);
         while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        currentGameID=newGameID;
         switch(newGameID){
             case 0:{
                 pregame=new Pregame("Bomba",context);
                 pregame.setGameID(newGameID);
+
                 break;
             }
             case 1:{

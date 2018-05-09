@@ -71,7 +71,7 @@ public class MyCountDownTimer implements GameObject {
             }
             if ((currentTime - lastChange) >= 1000000000) {
                 lastChange = currentTime;
-                this.counterText.setText(String.valueOf(--this.counter));
+                --this.counter;
             }
         }
     }
