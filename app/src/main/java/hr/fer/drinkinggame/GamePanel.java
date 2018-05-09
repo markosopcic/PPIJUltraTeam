@@ -35,7 +35,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
         setFocusable(true);
-        setupNewGame();
+        setupNewPregame();
     }
 
 
@@ -80,8 +80,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
        if(currentGame!=null) {
            if(!currentGame.finished)
                 currentGame.update();
-           else
-               setupNewGame();
+           else {
+               setupNewPregame();
+               currentGame=null;
+           }
+       }
+       else{
+            setupNewGame();
        }
      }
 
@@ -99,7 +104,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
-    private void setupNewGame(){
+    private void setupNewPregame(){
         Random rand=new Random();
         DisplayMetrics dm=context.getResources().getDisplayMetrics();
 
@@ -108,20 +113,34 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         switch(newGameID){
             case 0:{
                 pregame=new Pregame("Bomba",context);
-                currentGameID=0;
-                currentGame=new BombGame(context,dm,nadimci);
+                pregame.setGameID(newGameID);
                 break;
             }
             case 1:{
                 pregame=new Pregame("Pantomime",context);
-                currentGameID=1;
-                currentGame=new Pantomime(context,dm,thread,nadimci);
+                pregame.setGameID(newGameID);
                 break;
             }
             case 2:{
                 pregame=new Pregame("Viša-Niža",context);
-                currentGameID=2;
-                currentGame=new HigherLowerGame(context,dm,nadimci);
+                pregame.setGameID(newGameID);
+                break;
+            }
+        }
+    }
+
+    private void setupNewGame(){
+        switch(pregame.getGameID()){
+            case 0:{
+                currentGame=new BombGame(context,context.getResources().getDisplayMetrics(),nadimci);
+                break;
+            }
+            case 1:{
+                currentGame=new Pantomime(context,context.getResources().getDisplayMetrics(),thread,nadimci);
+                break;
+            }
+            case 2:{
+                currentGame=new HigherLowerGame(context,context.getResources().getDisplayMetrics(),nadimci);
                 break;
             }
         }
