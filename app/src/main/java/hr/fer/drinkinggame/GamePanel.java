@@ -15,6 +15,8 @@ import hr.fer.drinkinggame.bombGame.BombGame;
 import hr.fer.drinkinggame.higherlower.HigherLowerGame;
 import hr.fer.drinkinggame.pantomime.Pantomime;
 
+import static hr.fer.drinkinggame.MainThread.canvas;
+
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -104,6 +106,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         DisplayMetrics dm=context.getResources().getDisplayMetrics();
 
 
+
+
         int newGameID=rand.nextInt(NUMBER_OF_GAMES);
         while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
         switch(newGameID){
@@ -127,6 +131,6 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             }
         }
 
-        
+
     }
 }
