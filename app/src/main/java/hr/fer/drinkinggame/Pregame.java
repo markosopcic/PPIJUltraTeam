@@ -23,6 +23,7 @@ public class Pregame extends Game {
     private Context context;
     private Button play;
     private TextField f;
+    private int gameID;
 
     public Pregame(String name,Context context){
         this.name=name;
@@ -35,7 +36,7 @@ public class Pregame extends Game {
         play=new Button(bmp,pnt);
         gameObjects.add(play);
         TextPaint paint=new TextPaint();
-        paint.setTextSize(20*context.getResources().getDisplayMetrics().scaledDensity);
+        paint.setTextSize(40*context.getResources().getDisplayMetrics().scaledDensity);
         PointF pf=new PointF();
         Rect rect=new Rect();
         paint.getTextBounds(name,0,name.length(),rect);
@@ -65,5 +66,13 @@ public class Pregame extends Game {
 
     public void setText(String text){
         f.setText(text);
+    }
+
+    public void setGameID(int id){
+        this.gameID=id;
+    }
+
+    public int getGameID(){
+        return gameID;
     }
 }

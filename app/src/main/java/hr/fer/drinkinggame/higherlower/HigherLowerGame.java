@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -74,19 +76,22 @@ public class HigherLowerGame extends Game {
     }
 
 
-    private long drinkstart=0;
+    private boolean drinking=false;
 
     private int currentPlayerIndex;
     @Override
     public void handleTouch(MotionEvent event) {
         if(animating || startWait>0) return;
         if(higher.isButtonPressed(event)){
+            removeDrinkText();
             newCard=deck.pullCardAtIndex(new Random().nextInt(deck.sizeOfDeck()));
             if(newCard.isHigher(current)){
                 showCard();
+                wasCorrect=Boolean.TRUE;
             }
             else{
-                    drinkstart=System.currentTimeMillis();
+                wasCorrect=Boolean.FALSE;
+                    drinking=true;
                     drinkText.setDrinking(names.get(currentPlayerIndex),"piješ");
                     gameObjects.add(drinkText);
                     drink=true;
@@ -98,9 +103,11 @@ public class HigherLowerGame extends Game {
             newCard=deck.pullCardAtIndex(new Random().nextInt(deck.sizeOfDeck()));
             if(newCard.isLower(current)){
                 showCard();
+                wasCorrect=Boolean.TRUE;
             }
             else{
-                drinkstart=System.currentTimeMillis();
+                wasCorrect=Boolean.FALSE;
+                drinking=true;
                 drinkText.setDrinking(names.get(currentPlayerIndex),"piješ");
                 gameObjects.add(drinkText);
                 drink=true;
@@ -111,6 +118,25 @@ public class HigherLowerGame extends Game {
 
     }
 
+    public void removeDrinkText(){
+        gameObjects.remove(drinkText);
+        drinking=false;
+    }
+
+    private Boolean wasCorrect=null;
+
+    @Override
+    public void draw(Canvas canvas) {
+        if(wasCorrect==null){
+
+        }
+        else if(wasCorrect){
+            canvas.drawColor(Color.GREEN);
+        }
+        else canvas.drawColor(Color.RED);
+        super.draw(canvas);
+    }
+
     private long startWait=0;
     @Override
     public void update() {
@@ -118,13 +144,6 @@ public class HigherLowerGame extends Game {
         if(startWait!=0){
             if(System.currentTimeMillis()-startWait>2000) finished=true;
             return;
-        }
-        if(drinkstart>0 && System.currentTimeMillis()-drinkstart>1000){
-            drinkstart=0;
-            gameObjects.remove(drinkText);
-            if(!finished && numOfRounds<=0) {
-                startWait=System.currentTimeMillis();
-            }
         }
         if(animating){
             newCard.changePoint(new Point(newCard.getPoint().x,(int)(newCard.getPoint().y+(System.currentTimeMillis()-oldTime)*speed)));
