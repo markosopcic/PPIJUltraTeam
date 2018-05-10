@@ -38,11 +38,9 @@ import hr.fer.drinkinggame.pantomime.TextField;
 
 
 public class BombGame extends Game {
-    private List<String> categories;
     private TextField player;
     private TextField category;
     private Bomb bomb1;
-    private Bomb bomb2;
     private Explosion expl;
     private Explosion armyBackground;
     private Button buttonNext;
@@ -53,9 +51,6 @@ public class BombGame extends Game {
     private MediaPlayer ring;
     private  MyCountDownTimer myCountDownTimer1;
 
-
-
-    private Context context;
 
     public BombGame(final Context context, DisplayMetrics dm, ArrayList<String> nadimci){
 
@@ -73,7 +68,7 @@ public class BombGame extends Game {
         categoires.add("Odjevni predmeti");
         categoires.add("Marke mobitela");
         categoires.add("Predmeti na FER-u");
-        categoires.add("Vrste prijevoznih sredstava");
+        categoires.add("Prijevozna sredstava");
         categoires.add("Gradovi u Dalmaciji");
         categoires.add("Vrste vina");
         categoires.add("Vrste alkoholnih pića");
@@ -83,17 +78,14 @@ public class BombGame extends Game {
         categoires.add("Dobitnici Oscara");
         categoires.add("Države Europe");
         categoires.add("Fakulteti u Zagrebu");
-        categoires.add("Političke stranke u Hrvatskoj");
+        categoires.add("Političke stranke");
         categoires.add("Žanrovi filmova");
         categoires.add("Realitiy showowi");
 
-        int index = ThreadLocalRandom.current().nextInt(0, categoires.size());
+        //zvukovi
 
-        int radnomNumber = ThreadLocalRandom.current().nextInt(30, 41);
         tick = MediaPlayer.create(context, R.raw.ticktick);
         ring= MediaPlayer.create(context,R.raw.explosionsound);
-
-        //Toast.makeText(context, categoires.get(index), Toast.LENGTH_LONG).show();
 
         //postavljanje pozadine
 
@@ -105,19 +97,21 @@ public class BombGame extends Game {
 
         this.gameObjects.add(armyBackground);
 
-        String categoryString = categoires.get(index);
+        //postavljanje kategorjie
 
-        //int textWidth = categoryString.measureText(temp);
+        int index = ThreadLocalRandom.current().nextInt(0, categoires.size());
+        String categoryString = categoires.get(index);
 
         TextPaint paint = new TextPaint();
         paint.setTextSize(90);
-        paint.setColor(Color.WHITE);
+        paint.setColor(Color.RED);
         float textWidth = paint.measureText(categoryString);
 
         category = new TextField(categoryString, paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*1/10));
 
-        //ispis
         this.gameObjects.add(category);
+
+        //postavljajne igraca
 
         int radnomNumber2 = ThreadLocalRandom.current().nextInt(0, nadimci.size());
 
@@ -125,8 +119,9 @@ public class BombGame extends Game {
 
         player = new TextField(nadimci.get(radnomNumber2), paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*5/20));
 
-       this.gameObjects.add(player);
+        this.gameObjects.add(player);
 
+        //postavljanje bombe
 
         Bitmap bomb1Bitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.bomba1);
         bomb1Bitmap=Bitmap.createScaledBitmap(bomb1Bitmap,dm.widthPixels*4/10,dm.heightPixels*25/100,false);
@@ -140,12 +135,15 @@ public class BombGame extends Game {
 
         this.gameObjects.add(bomb1);
 
+        //inicijalizacija eksplozije
 
         Bitmap expBitmap= BitmapFactory.decodeResource(context.getResources(),R.drawable.explode);
         expBitmap=Bitmap.createScaledBitmap(expBitmap,dm.widthPixels*7/10,dm.heightPixels*35/100,false);
-        Point expPoint=new Point(dm.widthPixels*5/10 - expBitmap.getWidth()/2,dm.heightPixels*6/10 - expBitmap.getHeight());
+        Point expPoint=new Point(dm.widthPixels*5/10 - expBitmap.getWidth()/2,dm.heightPixels*7/10 - expBitmap.getHeight());
 
         expl = new Explosion(expBitmap, expPoint);
+
+        //postavljanje buttona
 
         Bitmap lowerBitmap=BitmapFactory.decodeResource(context.getResources(),R.drawable.next);
         lowerBitmap=Bitmap.createScaledBitmap(lowerBitmap,dm.widthPixels*8/10,dm.heightPixels*2/10,false);
@@ -153,6 +151,8 @@ public class BombGame extends Game {
         buttonNext = new Button(lowerBitmap,lowerPoint);
 
         this.gameObjects.add(buttonNext);
+
+        //pokretanje TIMERA
 
         myCountDownTimer1 = new MyCountDownTimer(10,this,tick, 1);
         gameObjects.add(myCountDownTimer1);
@@ -173,7 +173,7 @@ public class BombGame extends Game {
            }
             TextPaint paint = new TextPaint();
             paint.setTextSize(90);
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.RED);
             float textWidth = paint.measureText(buduciIgrac);
            player = new TextField(buduciIgrac,paint, new PointF(dm.widthPixels*5/10-textWidth/2,dm.heightPixels*5/20));
            this.gameObjects.add(player);
@@ -183,11 +183,7 @@ public class BombGame extends Game {
 
     public void handleExplosion(){
         bomb1.setExplosion(true);
-        if(gameObjects.contains(bomb1)){
-            gameObjects.remove(bomb1);
-        }else{
-            gameObjects.remove(bomb2);
-        }
+        gameObjects.remove(bomb1);
         gameObjects.add(expl);
         gameObjects.remove(myCountDownTimer1);
         MyCountDownTimer myCountDownTimer2 = new MyCountDownTimer(5,this,ring, 2);
