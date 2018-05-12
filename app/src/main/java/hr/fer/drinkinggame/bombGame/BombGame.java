@@ -77,10 +77,13 @@ public class BombGame extends Game {
         categoires.add("Klubovi u NBA-u");
         categoires.add("Dobitnici Oscara");
         categoires.add("Države Europe");
+        categoires.add("Programski jezici");
         categoires.add("Fakulteti u Zagrebu");
         categoires.add("Političke stranke");
         categoires.add("Žanrovi filmova");
-        categoires.add("Realitiy showowi");
+        categoires.add("Realitiy showovi");
+        categoires.add("Sisavci");
+        categoires.add("Vrste voća");
 
         //zvukovi
 
@@ -154,7 +157,9 @@ public class BombGame extends Game {
 
         //pokretanje TIMERA
 
-        myCountDownTimer1 = new MyCountDownTimer(10,this,tick, 1);
+        int timeTimer = ThreadLocalRandom.current().nextInt(50, 70);
+
+        myCountDownTimer1 = new MyCountDownTimer(timeTimer,this,tick, 1);
         gameObjects.add(myCountDownTimer1);
         myCountDownTimer1.start();
 
