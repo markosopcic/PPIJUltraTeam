@@ -31,10 +31,10 @@ public class PantomimeKeyWords {
         add("Mac");
         add("Puska");
         add("Stolica");
-        add("Masina za pranje rublja");
+        add("Ves masina");
         add("Kad jaganjci utihnu");
         add("Stephen Hawking");
-        add("King Romano Barilar");
+        add("Romano Barilar");
         add("Lezeci policajac");
         add("Lopta");
         add("Piva");
@@ -59,7 +59,7 @@ public class PantomimeKeyWords {
         List<String> rici = new ArrayList<>();
         Set<Integer> randomSet = new HashSet<>();
         while(randomSet.size()!=4){
-            randomSet.add(rand.nextInt(keyWords.size()-1));
+            randomSet.add(rand.nextInt(keyWords.size()));
         }
         for (Integer temp : randomSet){
             rici.add(keyWords.get(temp));
@@ -71,7 +71,7 @@ public class PantomimeKeyWords {
         String temp;
         do {
             Random rand = new Random();
-            temp = PantomimeKeyWords.keyWords.get(rand.nextInt(keyWords.size() - 1));
+            temp = PantomimeKeyWords.keyWords.get(rand.nextInt(PantomimeKeyWords.keyWords.size()));
         } while(keyWords.contains(temp));
         return temp;
     }

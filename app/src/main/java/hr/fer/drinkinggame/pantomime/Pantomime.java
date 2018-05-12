@@ -64,9 +64,6 @@ public class Pantomime extends Game {
         Clock clock = initializeClock();
         addTextFieldsAndButtons();
         createStartButton(clock);
-
-
-
     }
 
     private void setBackground(){
@@ -205,7 +202,7 @@ public class Pantomime extends Game {
         }
     }
 
-    public void finish(){
+    public void endGuessing(){
         TextPaint textPaint = initializeTextPaint(dm.density, 30, Color.WHITE);
         float x = dm.widthPixels;
         float y = dm.heightPixels;
@@ -214,6 +211,12 @@ public class Pantomime extends Game {
         gameObjects.add(new TextField(text1, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4)));
         gameObjects.add(new TextField(text2, textPaint, new PointF(x/4, drawingHeight+(y-drawingHeight)/4 - textPaint.ascent() + textPaint.descent() + dm.density * 5)));
         getRidOfTextGuessedButtons();
+        EndClock endClock = new EndClock(this);
+        gameObjects.add(endClock);
+        endClock.start();
+    }
+
+    public void finish(){
         finished=true;
     }
 
