@@ -47,6 +47,9 @@ public class AddingPlayerActivity extends Activity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View rowView = inflater.inflate(R.layout.field, null);
         parentLinearLayout.addView(rowView, parentLinearLayout.getChildCount() - 2);
+        LinearLayout linearLayout = (LinearLayout) parentLinearLayout.getChildAt(parentLinearLayout.getChildCount() - 3);
+        EditText editTekstNadimak = (EditText) linearLayout.getChildAt(0);
+        editTekstNadimak.requestFocus();
     }
 
     public void onDelete(View v) {
