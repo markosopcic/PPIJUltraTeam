@@ -157,7 +157,7 @@ public class BombGame extends Game {
 
         //pokretanje TIMERA
 
-        int timeTimer = ThreadLocalRandom.current().nextInt(50, 70);
+        int timeTimer = ThreadLocalRandom.current().nextInt(20, 35);
 
         myCountDownTimer1 = new MyCountDownTimer(timeTimer,this,tick, 1);
         gameObjects.add(myCountDownTimer1);
