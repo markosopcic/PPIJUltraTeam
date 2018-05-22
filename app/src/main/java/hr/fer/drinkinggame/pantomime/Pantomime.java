@@ -32,6 +32,8 @@ public class Pantomime extends Game {
     private List<Button> buttons;
     private List<Button> buttonsToAdd;
 
+    PantomimeKeyWords pantomimeKeyWords;
+
     private AssetManager am;
     private DisplayMetrics dm;
     private Context context;
@@ -43,8 +45,10 @@ public class Pantomime extends Game {
 
 
     public Pantomime(Context context, DisplayMetrics dm, MainThread thread, ArrayList<String> nadimci) {
+        this.pantomimeKeyWords = new PantomimeKeyWords();
+
         this.keyWords = new ArrayList<>();
-        this.keyWords.addAll(PantomimeKeyWords.getRandomKeyWords());
+        this.keyWords.addAll(pantomimeKeyWords.getRandomKeyWords());
 
         this.buttons = new ArrayList<>();
         this.buttonsToAdd = new ArrayList<>();
@@ -242,7 +246,7 @@ public class Pantomime extends Game {
 //                    if(changedField)
 //                        break;
 //                    changedField = true;
-                    String temp = PantomimeKeyWords.getRandomKeyWord(keyWords);
+                    String temp = pantomimeKeyWords.getRandomKeyWord(keyWords);
                     TextField text = ((TextChangeButton) button).text;
                     float oldWidth = text.getTextWidth();
                     float newWidth = text.getTextWidth(temp);
