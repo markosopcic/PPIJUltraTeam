@@ -1,6 +1,8 @@
 package hr.fer.drinkinggame;
 
 import android.app.Activity;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.res.Configuration;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import hr.fer.drinkinggame.database.DrinkingGameDatabase;
 
 public class GameActivity extends Activity {
 
