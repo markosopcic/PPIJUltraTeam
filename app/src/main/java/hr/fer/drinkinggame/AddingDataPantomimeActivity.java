@@ -22,6 +22,7 @@ public class AddingDataPantomimeActivity extends Activity {
     private LinearLayout parentLinearLayout;
     private List<String> categories;
     private int brojUcitanih;
+    private int velikiBrojac;
 
     @Override
     protected void onResume() {
@@ -42,6 +43,8 @@ public class AddingDataPantomimeActivity extends Activity {
         categories = MainMenuActivity.database.databaseDao().getPantomimeWords();
 
         brojUcitanih = categories.size();
+        velikiBrojac = brojUcitanih;
+
 
         //prikaz kategorija
         for(int i=0,l=categories.size();i<l;++i){
@@ -61,11 +64,16 @@ public class AddingDataPantomimeActivity extends Activity {
         LinearLayout linearLayout = (LinearLayout) parentLinearLayout.getChildAt(parentLinearLayout.getChildCount() - 3);
         EditText editTekstNadimak = (EditText) linearLayout.getChildAt(0);
         editTekstNadimak.requestFocus();
+        velikiBrojac++;
+
     }
 
     public void onDone(View view) {
         int size = parentLinearLayout.getChildCount()-3;
-
+        if(velikiBrojac<5){
+            Toast.makeText(this, "Minimalno je potrebno pet pojmova", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         for(int i=brojUcitanih;i<size;++i){
@@ -95,11 +103,14 @@ public class AddingDataPantomimeActivity extends Activity {
         parentLinearLayout.removeView((View) v.getParent());
         brojUcitanih--;
         MainMenuActivity.database.databaseDao().removePantomimeWord(nazivKategorije);
+        velikiBrojac--;
 
     }
 
     public void onDelete(View v){
         parentLinearLayout.removeView((View) v.getParent());
+        velikiBrojac--;
+
     }
 
 
