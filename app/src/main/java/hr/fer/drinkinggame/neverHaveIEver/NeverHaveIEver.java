@@ -47,18 +47,26 @@ public class NeverHaveIEver extends Game {
         String haveI = "";
         switch (coinFlip){
             case 0:
-                haveI = "Pije tko jest!";
+                haveI = "Pije tko je:";
                 break;
             case 1:
-                haveI = "Pije tko nije!";
+                haveI = "Pije tko nije:";
                 break;
         }
         TextPaint paint = initializeTextPaint(dm.density, 33, Color.GREEN);
-        float width = paint.measureText(haveI);
 
-        TextField tko = new TextField(haveI, paint, new PointF(dm.widthPixels/2 -width/2,dm.heightPixels*3/8));
+
+        TextField tko = new TextField(haveI, paint);
+        tko.scale(dm.widthPixels);
+        float width = paint.measureText(haveI);
+        tko.setPoint(new PointF(dm.widthPixels/2 -width/2,dm.heightPixels*3/8));
+
+
+        TextField sto = new TextField(neverText, paint);
+        sto.scale(dm.widthPixels);
         width = paint.measureText(neverText);
-        TextField sto = new TextField(neverText, paint, new PointF(dm.widthPixels/2 - width/2,dm.heightPixels*5/8));
+        sto.setPoint(new PointF(dm.widthPixels/2 - width/2,dm.heightPixels*5/8));
+
         this.gameObjects.add(tko);
         this.gameObjects.add(sto);
         EndButton krajicnik =  null;

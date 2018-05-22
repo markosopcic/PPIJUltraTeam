@@ -60,6 +60,14 @@ public class TextField implements GameObject {
         this.paint.setColor(color);
     }
 
+    public void scale(float width){
+        if (paint.measureText(text)>width){
+            for (float i = (int)paint.getTextSize(); paint.measureText(text) > width ; i--) {
+                paint.setTextSize(i);
+            }
+        }
+    }
+
     @Override
     public void draw(Canvas canvas) {
         canvas.drawText(text, point.x, point.y, paint);
