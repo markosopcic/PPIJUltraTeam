@@ -10,6 +10,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/cheers"
         android:supportsRtl="true"
+
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
         <activity
             android:name=".menus.MainMenuActivity"
@@ -20,13 +21,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity" />
-        <activity android:name=".AddingPlayerActivity" />
-        <activity android:name=".AddingDataBombGameActivity" />
-        <activity android:name=".AddingDataPantomimeActivity" />
-        <activity android:name=".AddingDataActivity" />
-        <activity android:name=".AddingDataNeverHaveIEverActivity" />
-        <activity android:name=".InfoActivity"></activity>
+        <activity android:name=".GameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddingPlayerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddingDataBombGameActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddingDataPantomimeActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddingDataActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddingDataNeverHaveIEverActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".InfoActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

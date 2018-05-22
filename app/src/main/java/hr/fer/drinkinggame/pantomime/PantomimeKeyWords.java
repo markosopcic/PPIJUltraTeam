@@ -37,7 +37,7 @@ public class PantomimeKeyWords {
         String temp;
         do {
             Random rand = new Random();
-            temp = keyWords.get(rand.nextInt(keyWords.size()));
+            temp = this.keyWords.get(rand.nextInt(this.keyWords.size()));
         } while(keyWords.contains(temp));
         return temp;
     }
