@@ -12,21 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="bombGame"
+        android:text="Bomba"
         android:onClick="bombGame"/>
     <Button
         android:id="@+id/buttonPantomime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="pantomime"
+        android:text="Pantomima"
         android:onClick="pantomime"/>
     <Button
         android:id="@+id/buttonNeverHaveIEver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="neverHaveIever"
+        android:text="Never Have I Ever"
         android:onClick="neverHaveIever"/>
 
 </LinearLayout>
