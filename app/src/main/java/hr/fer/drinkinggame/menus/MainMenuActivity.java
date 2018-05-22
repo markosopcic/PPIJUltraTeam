@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import hr.fer.drinkinggame.AddingDataActivity;
 import hr.fer.drinkinggame.AddingPlayerActivity;
 import hr.fer.drinkinggame.GameActivity;
 import hr.fer.drinkinggame.R;
@@ -23,7 +24,7 @@ public class MainMenuActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Intent startGameIntent = new Intent(MainMenuActivity.this,
-                        AddingPlayerActivity.class);
+                        AddingDataActivity.class);
                 startActivity(startGameIntent);
             }
         });
