@@ -16,5 +16,5 @@
         android:layout_height="40dp"
         android:layout_weight="1"
         android:background="@android:drawable/ic_delete"
-        android:onClick="onDelete"/>
+        android:onClick="onDelete2"/>
 </LinearLayout>

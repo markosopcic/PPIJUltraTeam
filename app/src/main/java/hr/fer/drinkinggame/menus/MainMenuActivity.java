@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 
 import com.facebook.stetho.Stetho;
 
+import hr.fer.drinkinggame.AddingDataActivity;
 import hr.fer.drinkinggame.AddingPlayerActivity;
 import hr.fer.drinkinggame.DatabaseLoader;
 import hr.fer.drinkinggame.GameActivity;
@@ -37,9 +38,17 @@ public class MainMenuActivity extends Activity {
                 Intent startGameIntent = new Intent(MainMenuActivity.this,
                         AddingPlayerActivity.class);
                 startActivity(startGameIntent);
+
             }
         });
-
+        Button settings=findViewById(R.id.settings);
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent set=new Intent(MainMenuActivity.this, AddingDataActivity.class);
+                startActivity(set);
+            }
+        });
     }
 
     @Override

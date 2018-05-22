@@ -15,13 +15,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import hr.fer.drinkinggame.database.BombCategories;
+import hr.fer.drinkinggame.menus.MainMenuActivity;
 
 public class AddingDataActivity extends Activity {
 
     private LinearLayout parentLinearLayout;
-    private ArrayList<String> categories;
+    private List<String> categories;
     private int brojUcitanih;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        categories = MainMenuActivity.database.databaseDao().getBombCategories();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +42,7 @@ public class AddingDataActivity extends Activity {
         parentLinearLayout = (LinearLayout) findViewById(R.id.parent_linear_layout);
 
         //za sad
-        categories = new ArrayList<>();
-
-        categories.add("BLA");
-        categories.add("PRPR");
+        categories = MainMenuActivity.database.databaseDao().getBombCategories();
 
         brojUcitanih = categories.size();
         
@@ -61,14 +67,7 @@ public class AddingDataActivity extends Activity {
     }
 
     public void onDone(View view) {
-        categories = new ArrayList<>();
         int size = parentLinearLayout.getChildCount()-3;
-        for(int i=0;i<brojUcitanih;++i) {
-            LinearLayout v = (LinearLayout) parentLinearLayout.getChildAt(i+1);
-            TextView textViewKategorija = (TextView) v.getChildAt(0);
-            String tekstKategorija = textViewKategorija.getText().toString();
-            categories.add(tekstKategorija);
-        }
 
 
 
@@ -81,17 +80,29 @@ public class AddingDataActivity extends Activity {
                 editTekstKategorija.requestFocus();
                 return;
             }
-            categories.add(tekstKategorija);
+            BombCategories category=new BombCategories(tekstKategorija);
+            MainMenuActivity.database.databaseDao().insertBombCategory(category);
         }
+
+        finish();
 
 
 
     }
 
 
-    public void onDelete(View v) {
+    public void onDelete2(View v) {
+        LinearLayout linearLayout = (LinearLayout) v.getParent();
+        TextView textView = (TextView) linearLayout.getChildAt(0);
+        String nazivKategorije = textView.getText().toString();
         parentLinearLayout.removeView((View) v.getParent());
         brojUcitanih--;
+        MainMenuActivity.database.databaseDao().removeBombCategory(nazivKategorije);
+
+    }
+
+    public void onDelete(View v){
+        parentLinearLayout.removeView((View) v.getParent());
     }
 
 
