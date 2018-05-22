@@ -14,11 +14,13 @@ import java.util.List;
  */
 
 public class CardDeck {
-    public static List<String> strengths= Arrays.asList("2","3","4","5","6","7","8","9","jack","queen","king","10","ace");
+    public static List<String> strengths= Arrays.asList("2","3","4","5","6","7","8","9","10","jack","queen","king","ace");
    private List<Card> cards;
+   private List<Card> usedCards;
 
     public CardDeck(AssetManager manager, DisplayMetrics dm){
         String[] c=null;
+        usedCards=new ArrayList<>();
         try {
              c = manager.list("cards");
         }catch(Exception e){
@@ -44,7 +46,12 @@ public class CardDeck {
     public Card pullCardAtIndex(int index){
         if(index>=0 && index<cards.size()){
             Card c=cards.get(index);
-            cards.remove(index);
+            usedCards.add(c);
+            cards.remove(c);
+            if(cards.size()==0){
+                cards=usedCards;
+                usedCards.clear();
+            }
             return c;
 
         }

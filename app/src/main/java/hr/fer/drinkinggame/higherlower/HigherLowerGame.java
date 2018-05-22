@@ -167,6 +167,10 @@ public class HigherLowerGame extends Game {
     public void showCard(){
         this.gameObjects.add(newCard);
         numOfRounds--;
+        if (numOfRounds == 0) {
+            gameObjects.remove(higher);
+            gameObjects.remove(lower);
+        }
         animating=true;
         newCard.changePoint(new Point(current.getPoint().x,-current.getCard().getHeight()));
         oldTime=System.currentTimeMillis();
