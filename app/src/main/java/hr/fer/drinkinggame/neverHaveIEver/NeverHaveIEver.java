@@ -53,18 +53,16 @@ public class NeverHaveIEver extends Game {
                 haveI = "Pije tko nije:";
                 break;
         }
-        TextPaint paint = initializeTextPaint(dm.density, 33, Color.GREEN);
-
-
-        TextField tko = new TextField(haveI, paint);
+        TextPaint paintTko = initializeTextPaint(dm.density, 33, Color.GREEN);
+        TextField tko = new TextField(haveI, paintTko);
         tko.scale(dm.widthPixels);
-        float width = paint.measureText(haveI);
+        float width = paintTko.measureText(haveI);
         tko.setPoint(new PointF(dm.widthPixels/2 -width/2,dm.heightPixels*3/8));
 
-
-        TextField sto = new TextField(neverText, paint);
+        TextPaint paintSto = initializeTextPaint(dm.density, 33, Color.GREEN);
+        TextField sto = new TextField(neverText, paintSto);
         sto.scale(dm.widthPixels);
-        width = paint.measureText(neverText);
+        width = paintSto.measureText(neverText);
         sto.setPoint(new PointF(dm.widthPixels/2 - width/2,dm.heightPixels*5/8));
 
         this.gameObjects.add(tko);
