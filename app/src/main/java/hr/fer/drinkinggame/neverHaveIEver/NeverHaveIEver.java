@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import hr.fer.drinkinggame.Game;
+import hr.fer.drinkinggame.generalobjects.Background;
 import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.pantomime.TextField;
 import hr.fer.drinkinggame.generalobjects.Picture;
@@ -41,7 +42,8 @@ public class NeverHaveIEver extends Game {
         am = context.getAssets();
         this.dm = dm;
         this.context = context;
-
+        Background back = new Background(dm, Color.CYAN);
+        this.gameObjects.add(back);
         Random rand = new Random();
         int coinFlip = rand.nextInt(2);
         String haveI = "";
@@ -53,15 +55,15 @@ public class NeverHaveIEver extends Game {
                 haveI = "Pije tko nije:";
                 break;
         }
-        TextPaint paintTko = initializeTextPaint(dm.density, 33, Color.GREEN);
+        TextPaint paintTko = initializeTextPaint(dm.density, 44, Color.rgb(39, 162 , 214));
         TextField tko = new TextField(haveI, paintTko);
         tko.scale(dm.widthPixels);
         float width = paintTko.measureText(haveI);
         tko.setPoint(new PointF(dm.widthPixels/2 -width/2,dm.heightPixels*3/8));
 
-        TextPaint paintSto = initializeTextPaint(dm.density, 33, Color.GREEN);
+        TextPaint paintSto = initializeTextPaint(dm.density, 33, Color.rgb(245, 146, 76));
         TextField sto = new TextField(neverText, paintSto);
-        sto.scale(dm.widthPixels);
+        sto.scale(dm.widthPixels*18/20);
         width = paintSto.measureText(neverText);
         sto.setPoint(new PointF(dm.widthPixels/2 - width/2,dm.heightPixels*5/8));
 

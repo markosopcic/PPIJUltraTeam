@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.MainThread;
@@ -92,17 +93,16 @@ public class Pantomime extends Game {
     }
 
     public void addPlayers(){
-        TextPaint textPaint = initializeTextPaint(dm.density, 20, Color.WHITE);
+        Random rand = new Random();
+        TextPaint textPaint = initializeTextPaint(dm.density, 25, Color.WHITE);
         Paint.FontMetrics fm = textPaint.getFontMetrics();
         float margin = 5 * dm.density;
-        String playerOne = "Objašnjava:" + nadimci.get(0);
+        String playerOne = "Objašnjava:" + nadimci.get(rand.nextInt(nadimci.size()));
         String playerTwo = "Pogađa:" + nadimci.get(1);
-        TextField explainer = new TextField(playerOne, textPaint, new PointF(margin,drawingHeight + margin - fm.ascent));
+        TextField explainer = new TextField(playerOne, textPaint, new PointF(margin,drawingHeight + margin - fm.ascent + 40/3 * dm.density));
         // krenemo od drawingHeighta dodamo marginu razlike i pomaknemo za ascent
-        TextField solver = new TextField(playerTwo, textPaint, new PointF(margin, drawingHeight + margin * 2 - fm.ascent * 2 + fm.descent));
         // pomaknemo se gdje je prvi te otamo micemo za jedan desent marginu i ascent
         this.gameObjects.add(explainer);
-        this.gameObjects.add(solver);
     }
 
     private Clock initializeClock(){
@@ -139,6 +139,7 @@ public class Pantomime extends Game {
 
         float drawingWidth = x;
         float drawingHeight = (float) (y - descent * 2 - marginTaB * 2 - ascent * 2 + marginTaB/2);
+        float totalHeight = drawingHeight;
         // x na pola, y na vrhu gjde krece zapis prvog
         for (String temp : this.keyWords){
             textPaint = initializeTextPaint(dm.density, 30, Color.WHITE);
@@ -157,13 +158,21 @@ public class Pantomime extends Game {
             try{
             button = new TextChangeButton(am.open("pantomime/change_word.png"), buttonWidth, buttonHeight, buttonPoint, text);}
             catch (Exception e){
+
             }
-            this.gameObjects.add(button);
-            this.buttons.add(button);
+            this.buttonsToAdd.add(button);
 
             drawingHeight += marginTaB + descent;
         }
         this.drawingHeight = drawingHeight;
+        UpitnikButton upitnik = null;
+        try{
+            upitnik= new UpitnikButton(am.open("pantomime/upitnik.jpg"), new Point(dm.widthPixels/20, (int)(totalHeight)), dm.widthPixels*18/20, (int)(drawingHeight-totalHeight) );
+        }catch (Exception e){
+
+        }
+        this.buttons.add(upitnik);
+        this.gameObjects.add(upitnik);
     }
 
     private TextPaint initializeTextPaint(float density, int size, int color){
@@ -282,6 +291,21 @@ public class Pantomime extends Game {
                             }
                         }
                     }
+                } else if (button instanceof UpitnikButton){
+                    gameObjects.remove(button);
+                    buttons.remove(button);
+                    List<Button> tempButtons = new ArrayList<>();
+                    for (Button temp : buttonsToAdd){
+                        if (temp instanceof TextChangeButton){
+                            this.buttons.add(temp);
+                            this.gameObjects.add(temp);
+                            tempButtons.add(temp);
+                        }
+                    }
+                    for (Button temp : tempButtons){
+                        buttonsToAdd.remove(temp);
+                    }
+
                 }
                 break;
             }
