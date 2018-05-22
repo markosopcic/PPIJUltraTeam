@@ -120,6 +120,10 @@ public class AddingDataBombGameActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        if(velikiBrojac<5){
+            Toast.makeText(this, "Minimalno je potrebno pet pojmova", Toast.LENGTH_SHORT).show();
+            return;
+        }
         super.onBackPressed();
         onDone(null);
     }
