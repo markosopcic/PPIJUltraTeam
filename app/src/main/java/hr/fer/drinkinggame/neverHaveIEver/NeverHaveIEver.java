@@ -26,11 +26,17 @@ public class NeverHaveIEver extends Game {
 
     private List<Button> buttons;
 
+    private NeverHaveIEvers neverHaveIEvers;
+
     private AssetManager am;
     private DisplayMetrics dm;
     private Context context;
 
     public NeverHaveIEver(Context context, DisplayMetrics dm){
+        this.neverHaveIEvers = new NeverHaveIEvers();
+
+        String neverText = neverHaveIEvers.getRandomNeverHaveIEver();
+
         buttons = new ArrayList<>();
         am = context.getAssets();
         this.dm = dm;
@@ -47,9 +53,14 @@ public class NeverHaveIEver extends Game {
                 haveI = "Pije tko nije!";
                 break;
         }
-        TextPaint paint = initializeTextPaint(dm.density, 22, Color.GREEN);
-        TextField tko = new TextField(haveI, paint, new PointF(dm.widthPixels/2,dm.heightPixels/2));
+        TextPaint paint = initializeTextPaint(dm.density, 33, Color.GREEN);
+        float width = paint.measureText(haveI);
+
+        TextField tko = new TextField(haveI, paint, new PointF(dm.widthPixels/2 -width/2,dm.heightPixels*3/8));
+        width = paint.measureText(neverText);
+        TextField sto = new TextField(neverText, paint, new PointF(dm.widthPixels/2 - width/2,dm.heightPixels*5/8));
         this.gameObjects.add(tko);
+        this.gameObjects.add(sto);
         EndButton krajicnik =  null;
         try{
             krajicnik = new EndButton(am.open("neverhaveiever/endbutt.jpg"), new Point(dm.widthPixels/4, dm.heightPixels - dm.heightPixels/4), dm.widthPixels/2, dm.heightPixels/6, this );

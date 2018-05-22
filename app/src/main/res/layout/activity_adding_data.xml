@@ -1,48 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    tools:context=".AddingDataActivity"
+    android:orientation="vertical">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/parent_linear_layout"
-        xmlns:tools="http://schemas.android.com/tools"
+    <Button
+        android:id="@+id/buttonBombGame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".AddingPlayerActivity"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="bombGame"
+        android:onClick="bombGame"/>
+    <Button
+        android:id="@+id/buttonPantomime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="pantomime"
+        android:onClick="pantomime"/>
+    <Button
+        android:id="@+id/buttonNeverHaveIEver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="neverHaveIever"
+        android:onClick="neverHaveIever"/>
 
-        <TextView
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Upišite nadimke igraca"
-            android:gravity="center"
-
-            />
-
-
-        <Button
-            android:id="@+id/add_field_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:onClick="onAddField"
-            android:text="Dodaj igraca"
-            />
-
-
-
-        <Button
-            android:id="@+id/buttonSaveAnketa"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp"
-            android:text="Svi igraci dodani ajmo pit"
-            android:onClick="onDone"/>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

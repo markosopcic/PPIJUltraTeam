@@ -13,6 +13,7 @@ import java.util.Random;
 
 import hr.fer.drinkinggame.bombGame.BombGame;
 import hr.fer.drinkinggame.higherlower.HigherLowerGame;
+import hr.fer.drinkinggame.neverHaveIEver.NeverHaveIEver;
 import hr.fer.drinkinggame.pantomime.Pantomime;
 
 import static hr.fer.drinkinggame.MainThread.canvas;
@@ -20,7 +21,7 @@ import static hr.fer.drinkinggame.MainThread.canvas;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
-    public static final int NUMBER_OF_GAMES=3;
+    public static final int NUMBER_OF_GAMES=4;
     private MainThread thread;
     private Game currentGame;
     private Context context;
@@ -115,8 +116,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
 
-        int newGameID=rand.nextInt(NUMBER_OF_GAMES);
-        while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        //int newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        //while(newGameID==currentGameID) newGameID=rand.nextInt(NUMBER_OF_GAMES);
+        int newGameID = 3;
         currentGameID=newGameID;
         switch(newGameID){
             case 0:{
@@ -135,6 +137,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 pregame.setGameID(newGameID);
                 break;
             }
+            case 3:{
+                pregame=new Pregame("Never have I ever",context);
+                pregame.setGameID(newGameID);
+                break;
+            }
         }
     }
 
@@ -150,6 +157,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             }
             case 2:{
                 currentGame=new HigherLowerGame(context,context.getResources().getDisplayMetrics(),nadimci);
+                break;
+            }
+            case 3:{
+                currentGame=new NeverHaveIEver(context,context.getResources().getDisplayMetrics());
                 break;
             }
         }
