@@ -23,6 +23,12 @@ public class DrinkText implements GameObject {
 
     public void setDrinking(String name,String text){
         this.text=name+" "+text;
+
+        pnt.setTextSize(width/10);
+
+        while(pnt.measureText(this.text)>width){
+            pnt.setTextSize(pnt.getTextSize()-1);
+        }
         p.x=width/2-(int)pnt.measureText(this.text)/2;
 
     }

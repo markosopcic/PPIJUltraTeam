@@ -98,7 +98,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void draw(Canvas canvas) {
-        if(!pregame.finished){
+        if(pregame!=null && !pregame.finished){
             pregame.draw(canvas);
             return;
         }
@@ -170,6 +170,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
     public void pauseGame(){
-        currentGame.pause();
+        if(currentGame!=null) {
+            currentGame.pause();
+        }
     }
 }
