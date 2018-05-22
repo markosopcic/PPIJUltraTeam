@@ -122,23 +122,23 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         currentGameID=newGameID;
         switch(newGameID){
             case 0:{
-                pregame=new Pregame("Bomba",context);
+                pregame=new Pregame("Bomba",context,nadimci);
                 pregame.setGameID(newGameID);
 
                 break;
             }
             case 1:{
-                pregame=new Pregame("Pantomime",context);
+                pregame=new Pregame("Pantomime",context,nadimci);
                 pregame.setGameID(newGameID);
                 break;
             }
             case 2:{
-                pregame=new Pregame("Viša-Niža",context);
+                pregame=new Pregame("Viša-Niža",context,nadimci);
                 pregame.setGameID(newGameID);
                 break;
             }
             case 3:{
-                pregame=new Pregame("Never have I ever",context);
+                pregame=new Pregame("Never have I ever",context,nadimci);
                 pregame.setGameID(newGameID);
                 break;
             }

@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class CardDeck {
-    public static List<String> strengths= Arrays.asList("2","3","4","5","6","7","8","9","jack","queen","king","10","ace");
+    public static List<String> strengths= Arrays.asList("2","3","4","5","6","7","8","9","10","jack","queen","king","ace");
    private List<Card> cards;
 
     public CardDeck(AssetManager manager, DisplayMetrics dm){
