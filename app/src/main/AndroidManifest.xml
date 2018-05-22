@@ -22,7 +22,10 @@
         </activity>
         <activity android:name=".GameActivity" />
         <activity android:name=".AddingPlayerActivity" />
-        <activity android:name=".AddingDataActivity"></activity>
+        <activity android:name=".AddingDataBombGameActivity" />
+        <activity android:name=".AddingDataPantomimeActivity" />
+        <activity android:name=".AddingDataActivity" />
+        <activity android:name=".AddingDataNeverHaveIEverActivity"></activity>
     </application>
 
 </manifest>

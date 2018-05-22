@@ -29,6 +29,7 @@ import hr.fer.drinkinggame.higherlower.Button;
 import hr.fer.drinkinggame.Game;
 import hr.fer.drinkinggame.GameObject;
 import hr.fer.drinkinggame.R;
+import hr.fer.drinkinggame.menus.MainMenuActivity;
 import hr.fer.drinkinggame.pantomime.TextField;
 
 
@@ -60,30 +61,7 @@ public class BombGame extends Game {
 
         explosion=false;
 
-        List<String> categoires = new ArrayList<>();
-        categoires.add("Marke automobila");
-        categoires.add("Nogometni klubovi Hrvatske");
-        categoires.add("Države Afrike");
-        categoires.add("Države Azije");
-        categoires.add("Odjevni predmeti");
-        categoires.add("Marke mobitela");
-        categoires.add("Predmeti na FER-u");
-        categoires.add("Prijevozna sredstava");
-        categoires.add("Gradovi u Dalmaciji");
-        categoires.add("Vrste vina");
-        categoires.add("Vrste alkoholnih pića");
-        categoires.add("Marke tenisica");
-        categoires.add("Zavodi na FER-u");
-        categoires.add("Klubovi u NBA-u");
-        categoires.add("Dobitnici Oscara");
-        categoires.add("Države Europe");
-        categoires.add("Programski jezici");
-        categoires.add("Fakulteti u Zagrebu");
-        categoires.add("Političke stranke");
-        categoires.add("Žanrovi filmova");
-        categoires.add("Realitiy showovi");
-        categoires.add("Sisavci");
-        categoires.add("Vrste voća");
+        List<String> categoires = MainMenuActivity.database.databaseDao().getBombCategories();
 
         //zvukovi
 

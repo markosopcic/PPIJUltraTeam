@@ -6,14 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 
 import com.facebook.stetho.Stetho;
 
 import hr.fer.drinkinggame.AddingDataActivity;
+import hr.fer.drinkinggame.AddingDataBombGameActivity;
 import hr.fer.drinkinggame.AddingPlayerActivity;
 import hr.fer.drinkinggame.DatabaseLoader;
-import hr.fer.drinkinggame.GameActivity;
 import hr.fer.drinkinggame.R;
 import hr.fer.drinkinggame.database.DrinkingGameDatabase;
 
