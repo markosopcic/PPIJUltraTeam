@@ -39,4 +39,10 @@ public class AddingDataActivity extends Activity {
                 AddingDataNeverHaveIEverActivity.class);
         startActivity(startGameIntent);
     }
+
+    public void info(View view) {
+        Intent startGameIntent = new Intent(AddingDataActivity.this,
+                InfoActivity.class);
+        startActivity(startGameIntent);
+    }
 }

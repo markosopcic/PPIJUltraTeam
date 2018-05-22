@@ -8,6 +8,14 @@
     android:orientation="vertical">
 
     <Button
+        android:id="@+id/buttonInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:text="Info"
+        android:onClick="info"/>
+
+    <Button
         android:id="@+id/buttonBombGame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,5 +36,7 @@
         android:layout_margin="15dp"
         android:text="Never Have I Ever"
         android:onClick="neverHaveIever"/>
+
+
 
 </LinearLayout>

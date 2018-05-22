@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoActivity">
+
+    <TextView
+        android:id="@+id/about_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Igrači na početku mogu dodavati nove pojmove i kategorije kako bi same igre bile što dinamičnije.
+Nakon što se unesu nadimci svih igrača, nasumično se bira jedna od igara. Kada ona završi slijedi druga, i tako u nedogled. \n"
+        />
+
+    <TextView
+        android:id="@+id/about_text_view2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BOMBA \n
+Ispiše se kategorija, te igrač čije ime je napisano ispod kategorije reče jedan pojam iz te kategorije, nakon čega pritisne tipku Dalje. Iza njega slijedi novi igrač (čije ime sada piše ispod kategorije), i tako sve dok se ne dogodi eksplozija. Igrač kojemu eksplodira bomba pije. \n"
+        />
+    <TextView
+        android:id="@+id/about_text_view3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VIŠA-NIŽA \n
+Igrač koji je na potezu pogađa hoće li sljedeća karta biti viša ili niža od trenutne. U slučaju da ne pogodi (ili da je sljedeća karta ista po vrijednosti kao i trenutna) igrač pije. \n"
+        />
+    <TextView
+        android:id="@+id/about_text_view4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PANTOMIMA \n
+Igrač čije ime je ispisano može odabrati jedan od četiri ponuđena pojma da se zamijeni s novim pojmom, nakon čega ima 60 sekundi da objasni što je više moguće pojmova. Onoliko koliko ih je objasnio toliko pića dijeli, a broj pojmova koje nije stigao objasniti jednak je broju pića koje on mora popiti. \n"
+        />
+    <TextView
+        android:id="@+id/about_text_view5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NEVER HAVE I EVER \n
+Ovisno o odabiru igre, igrači koji jesu/nisu doživili ispisanu stvar piju. \n"
+        />
+
+    <TextView
+        android:id="@+id/about_text_view6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VIKING \n
+Kada se pojavi Viking, igrač čije ime je ispisano mora staviti ruke tako da imitira vikinšku kacigu, dok ostali igrači moraju veslati. Tko zadnji zavesla, ili stavi kacigu na glavu taj pije. \n"
+        />
+
+</LinearLayout>

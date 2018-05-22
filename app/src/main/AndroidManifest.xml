@@ -25,7 +25,8 @@
         <activity android:name=".AddingDataBombGameActivity" />
         <activity android:name=".AddingDataPantomimeActivity" />
         <activity android:name=".AddingDataActivity" />
-        <activity android:name=".AddingDataNeverHaveIEverActivity"></activity>
+        <activity android:name=".AddingDataNeverHaveIEverActivity" />
+        <activity android:name=".InfoActivity"></activity>
     </application>
 
 </manifest>
