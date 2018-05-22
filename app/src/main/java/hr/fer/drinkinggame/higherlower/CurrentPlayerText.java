@@ -22,6 +22,9 @@ public class CurrentPlayerText implements GameObject {
     public void draw(Canvas canvas) {
         Paint pnt=new Paint();
         pnt.setTextSize(width/10);
+        while(pnt.measureText(text)>width*8/10) pnt.setTextSize(pnt.getTextSize()-1);
+        while(pnt.measureText(text)<width*8/10) pnt.setTextSize(pnt.getTextSize()+1);
+
         canvas.drawText(text,0,pnt.getTextSize(),pnt);
     }
 
