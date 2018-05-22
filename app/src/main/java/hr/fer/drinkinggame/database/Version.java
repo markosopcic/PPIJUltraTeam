@@ -11,4 +11,8 @@ public class Version {
     public int id;
 
     public String value;
+
+    public Version(String value){
+        this.value=value;
+    }
 }

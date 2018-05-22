@@ -40,4 +40,7 @@ public interface DatabaseDao {
 
     @Query("select value from version")
     public String getVersion();
+
+    @Insert
+    public void insertVersion(Version version);
 }

@@ -10,6 +10,7 @@ import hr.fer.drinkinggame.database.BombCategories;
 import hr.fer.drinkinggame.database.DrinkingGameDatabase;
 import hr.fer.drinkinggame.database.NeverHaveIEverWords;
 import hr.fer.drinkinggame.database.PantomimeWords;
+import hr.fer.drinkinggame.database.Version;
 import hr.fer.drinkinggame.menus.MainMenuActivity;
 
 public class DatabaseLoader {
@@ -30,6 +31,8 @@ public class DatabaseLoader {
             String dbVersion=database.databaseDao().getVersion();
             if(dbVersion==null || version.equals(dbVersion)==false){
                 database.clearAllTables();
+                Version vers=new Version(version);
+                database.databaseDao().insertVersion(vers);
                 loadInternal(context,database);
             }
 

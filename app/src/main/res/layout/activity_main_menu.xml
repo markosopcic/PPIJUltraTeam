@@ -3,8 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_weight="0.7"
+    android:orientation="vertical"
     tools:context="hr.fer.drinkinggame.menus.MainMenuActivity">
+
+
 
     <Button
         android:id="@+id/pokreniIgru"
@@ -12,15 +17,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-
         android:background="@drawable/buttonshape"
+        android:gravity="center_vertical|center"
+        android:shadowColor="#1C07A8"
+        android:shadowDx="0"
+        android:shadowDy="0"
+
+        android:shadowRadius="5"
+        android:text="Pokreni igru"
+        android:textColor="#FF1F1F"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@drawable/buttonshape"
+
+        android:gravity="center_vertical|center"
         android:shadowColor="#1C07A8"
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:text="Pokreni igru"
+        android:text="Postavke"
         android:textColor="#FF1F1F"
-
-        android:textSize="30sp"/>
-
+        android:textSize="30sp" />
 </LinearLayout>
