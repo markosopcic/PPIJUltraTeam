@@ -35,4 +35,6 @@ public abstract class Game implements GameObject{
     public boolean isFinished() {
         return finished;
     }
+
+    public void pause(){}
 }

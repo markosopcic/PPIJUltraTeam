@@ -200,5 +200,11 @@ public class BombGame extends Game {
         finished=true;
     }
 
+    @Override
+    public void pause(){
+        tick.stop();
+        ring.stop();
+    }
+
 }
 

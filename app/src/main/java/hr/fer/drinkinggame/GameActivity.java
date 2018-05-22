@@ -31,6 +31,7 @@ public class GameActivity extends Activity {
     protected void onPause(){
         super.onPause();
         view.paused=true;
+        view.pauseGame();
     }
 
 
