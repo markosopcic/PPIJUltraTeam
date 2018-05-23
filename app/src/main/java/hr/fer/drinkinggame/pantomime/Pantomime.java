@@ -204,6 +204,10 @@ public class Pantomime extends Game {
             if (temp instanceof TextChangeButton)
                 tempButtons.add(temp);
         }
+        for (Button temp : buttonsToAdd){
+            if (temp instanceof TextChangeButton)
+                tempButtons.add(temp);
+        }
         for(Button temp : tempButtons){
             buttons.remove(temp);
             gameObjects.remove(temp);
@@ -272,6 +276,13 @@ public class Pantomime extends Game {
                     buttons.remove(button);
                     gameObjects.remove(button);
                     getRidOfTextChangeButtons();
+                    for(Button temp : buttons){
+                        if(temp instanceof UpitnikButton) {
+                            gameObjects.remove(temp);
+                            buttons.remove(temp);
+                            break;
+                        }
+                    }
                     for (Button temp : buttonsToAdd) {
                         if(temp instanceof TextGuessedButton){
                             gameObjects.add(temp);
