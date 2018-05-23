@@ -73,6 +73,51 @@ public class Pregame extends Game {
             TextField field=new TextField(myname,tpaint,pf2);
             this.gameObjects.add(field);
 
+        }else{
+            if(name.equals("Bomba")){
+                Bitmap viking=BitmapFactory.decodeResource(context.getResources(),R.drawable.piro);
+                int width=context.getResources().getDisplayMetrics().widthPixels*6/10;
+                int height=context.getResources().getDisplayMetrics().heightPixels*4/10;
+                viking=Bitmap.createScaledBitmap(viking,width,height,false);
+                Point point=new Point(context.getResources().getDisplayMetrics().widthPixels/2-viking.getWidth()/2,height*4/10);
+                Picture pic=new Picture(viking,point);
+                this.gameObjects.add(pic);
+            }
+
+
+
+            if(name.equals("Pantomime")){
+                Bitmap viking=BitmapFactory.decodeResource(context.getResources(),R.drawable.hnk);
+                int width=context.getResources().getDisplayMetrics().widthPixels*5/10;
+                int height=context.getResources().getDisplayMetrics().heightPixels*4/10;
+                viking=Bitmap.createScaledBitmap(viking,width,height,false);
+                Point point=new Point(context.getResources().getDisplayMetrics().widthPixels/2-viking.getWidth()/2,height*4/10);
+                Picture pic=new Picture(viking,point);
+                this.gameObjects.add(pic);
+            }
+
+
+
+            if(name.equals("Viša-Niža")){
+                Bitmap viking=BitmapFactory.decodeResource(context.getResources(),R.drawable.grafika);
+                int width=context.getResources().getDisplayMetrics().widthPixels*5/10;
+                int height=context.getResources().getDisplayMetrics().heightPixels*4/10;
+                viking=Bitmap.createScaledBitmap(viking,width,height,false);
+                Point point=new Point(context.getResources().getDisplayMetrics().widthPixels/2-viking.getWidth()/2,height*4/10);
+                Picture pic=new Picture(viking,point);
+                this.gameObjects.add(pic);
+            }
+
+            if(name.equals("Never have I ever")){
+                Bitmap viking=BitmapFactory.decodeResource(context.getResources(),R.drawable.redbull);
+                int width=context.getResources().getDisplayMetrics().widthPixels*13/20;
+                int height=context.getResources().getDisplayMetrics().heightPixels*4/10;
+                viking=Bitmap.createScaledBitmap(viking,width,height,false);
+                Point point=new Point(context.getResources().getDisplayMetrics().widthPixels/2-viking.getWidth()/2,height*4/10);
+                Picture pic=new Picture(viking,point);
+                this.gameObjects.add(pic);
+            }
+
         }
     }
 
